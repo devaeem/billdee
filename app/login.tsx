@@ -13,8 +13,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Receipt } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
+  const handleLogin = () => {
+    router.push("/dashboard");
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 sm:p-6 md:p-8">
       <div className="absolute inset-0 bg-grid-black/[0.02] -z-10" />
@@ -88,7 +93,10 @@ const Login = () => {
             </form>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4 px-4 sm:px-6 md:px-8">
-            <Button className="w-full h-10 sm:h-11 bg-blue-600 hover:bg-blue-700 text-sm sm:text-base font-medium transition-all duration-200">
+            <Button
+              onClick={handleLogin}
+              className="w-full h-10 sm:h-11 bg-blue-600 hover:bg-blue-700 text-sm sm:text-base font-medium transition-all duration-200"
+            >
               เข้าสู่ระบบ
             </Button>
             <p className="text-center text-sm text-gray-600">
