@@ -3,16 +3,11 @@ FROM node:20-alpine AS base
 RUN apk add --no-cache libc6-compat
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# Development dependencies stage
-FROM base AS deps
-WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
-
 # Builder stage
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm run build
 
@@ -25,6 +20,10 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+
+# Install only production dependencies
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
 
 COPY --from=builder /app/public ./public
 
