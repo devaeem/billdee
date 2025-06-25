@@ -32,6 +32,7 @@ import { NavMain } from "./nav-main";
 import { NavSecondary } from "./nav-secondary";
 import { NavDocuments } from "./nav-documents";
 import { NavUser } from "./nav-user";
+import { useSession } from "next-auth/react";
 
 const data = {
   user: {
@@ -151,6 +152,8 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: session } = useSession();
+  console.log("session", session);
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -174,7 +177,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser
+          user={
+            session?.user as { name: string; email: string; avatar: string }
+          }
+        />
       </SidebarFooter>
     </Sidebar>
   );
