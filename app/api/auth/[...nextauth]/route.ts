@@ -15,7 +15,12 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
+        const user = {
+          id: "1",
+          name: "J Smith",
+          email: "jsmith@example.com",
+          role: "admin",
+        };
         return user;
       },
     }),
