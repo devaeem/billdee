@@ -33,6 +33,7 @@ const Login = () => {
       redirect: false,
       callbackUrl: "/dashboard",
     });
+    console.log(result, "result");
     if (result?.ok) {
       toast.success("เข้าสู่ระบบสำเร็จ", {
         description: "กำลังนำคุณไปยังหน้าหลัก",

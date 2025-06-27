@@ -4,6 +4,7 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
+  console.log(token, "token");
   const isAuthenticated = !!token;
   const userRole = token?.role || "user"; // Default to 'user' if no role specified
 

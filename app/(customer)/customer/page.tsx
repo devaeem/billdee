@@ -53,8 +53,13 @@ import {
   IconExclamationCircle,
   IconX,
 } from "@tabler/icons-react";
+import { useProfile } from "@/hooks/use-profile";
+import { signOut } from "next-auth/react";
 
 export default function CustomerDashboard() {
+  const { data: profile } = useProfile();
+
+  console.log("profile", profile);
   const user = {
     name: "devaeem",
     email: "customer@example.com",
@@ -298,7 +303,10 @@ export default function CustomerDashboard() {
 
               <DropdownMenuSeparator />
 
-              <DropdownMenuItem className="gap-3 p-2.5 cursor-pointer text-red-500 focus:text-red-500">
+              <DropdownMenuItem
+                onClick={() => signOut()}
+                className="gap-3 p-2.5 cursor-pointer text-red-500 focus:text-red-500"
+              >
                 <IconLogout className="size-5" />
                 <div className="grid gap-0.5">
                   <span className="font-medium">ออกจากระบบ</span>
