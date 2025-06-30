@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,22 +26,16 @@ import {
 } from "@tabler/icons-react";
 import { signOut } from "next-auth/react";
 import { useProfile } from "@/hooks/use-profile";
+import Link from "next/link";
 
 export function SiteHeader() {
   const { data: profile } = useProfile();
+  console.log("profile", profile);
 
   // Mock user data - replace with actual user data from your auth system
-  const user = {
-    name: "devaeem",
-    email: "customer@example.com",
-    avatar: "/images/avatar.png",
-    level: "ลูกค้าทั่วไป",
-    points: 1234,
-    nextLevel: 5000,
-  };
 
   return (
-    <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
+    <header className="flex h-(--header-height) p-6 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
       <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
         <SidebarTrigger className="-ml-1" />
         <Separator
@@ -49,6 +44,7 @@ export function SiteHeader() {
         />
         <h1 className="text-base font-medium">Documents</h1>
         <div className="ml-auto flex items-center gap-4">
+          <ThemeToggle />
           {/* Notifications */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -95,16 +91,18 @@ export function SiteHeader() {
               <button className="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-accent transition-colors">
                 <Avatar className="h-9 w-9 rounded-full border-2 border-primary/10">
                   <AvatarImage
-                    src={user.avatar}
-                    alt={user.name}
+                    src={profile?.data?.avatar}
+                    alt={profile?.firstName}
                     className="object-cover"
                   />
                   <AvatarFallback className="bg-primary/5">CN</AvatarFallback>
                 </Avatar>
                 <div className="hidden md:grid text-left text-sm leading-tight">
-                  <span className="font-medium">{user.name}</span>
+                  <span className="font-medium">
+                    {profile?.data?.firstName}
+                  </span>
                   <span className="text-muted-foreground text-xs">
-                    {user.email}
+                    {profile?.data?.email}
                   </span>
                 </div>
                 <IconDotsVertical className="size-4 text-muted-foreground" />
@@ -114,8 +112,8 @@ export function SiteHeader() {
               <div className="flex items-center gap-3 px-2 py-3">
                 <Avatar className="h-12 w-12 rounded-full border-2 border-primary/10">
                   <AvatarImage
-                    src={user.avatar}
-                    alt={user.name}
+                    src={profile?.data?.avatar}
+                    alt={profile?.data?.firstName}
                     className="object-cover"
                   />
                   <AvatarFallback className="bg-primary/5 text-lg">
@@ -123,18 +121,20 @@ export function SiteHeader() {
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid gap-1">
-                  <div className="font-medium leading-none">{user.name}</div>
+                  <div className="font-medium leading-none">
+                    {profile?.data?.firstName}
+                  </div>
                   <div className="text-sm text-muted-foreground">
-                    {user.email}
+                    {profile?.data?.email}
                   </div>
                   <div className="flex items-center gap-1.5 mt-1">
                     <IconCrown className="size-4 text-yellow-500" />
-                    <span className="text-xs">{user.level}</span>
+                    <span className="text-xs">{profile?.data?.level}</span>
                     <Badge
                       variant="secondary"
                       className="ml-auto text-xs font-normal"
                     >
-                      {user.points} points
+                      {profile?.points} points
                     </Badge>
                   </div>
                 </div>
@@ -143,13 +143,15 @@ export function SiteHeader() {
               <div className="px-2 py-2">
                 <div className="space-y-1">
                   <div className="text-xs text-muted-foreground">
-                    ถึงระดับถัดไป: {user.nextLevel - user.points} points
+                    ถึงระดับถัดไป: {profile?.nextLevel - profile?.points} points
                   </div>
                   <div className="h-2 rounded-full bg-secondary">
                     <div
                       className="h-full rounded-full bg-primary transition-all"
                       style={{
-                        width: `${(user.points / user.nextLevel) * 100}%`,
+                        width: `${
+                          (profile?.points / profile?.nextLevel) * 100
+                        }%`,
                       }}
                     />
                   </div>
@@ -200,15 +202,17 @@ export function SiteHeader() {
                     </span>
                   </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="gap-3 p-2.5 cursor-pointer">
-                  <IconSettings className="size-5" />
-                  <div className="grid gap-0.5">
-                    <span className="font-medium">ตั้งค่า</span>
-                    <span className="text-xs text-muted-foreground">
-                      ปรับแต่งการใช้งาน
-                    </span>
-                  </div>
-                </DropdownMenuItem>
+                <Link href="/settings" className="block">
+                  <DropdownMenuItem className="gap-3 p-2.5 cursor-pointer">
+                    <IconSettings className="size-5" />
+                    <div className="grid gap-0.5">
+                      <span className="font-medium">ตั้งค่า</span>
+                      <span className="text-xs text-muted-foreground">
+                        ปรับแต่งการใช้งาน
+                      </span>
+                    </div>
+                  </DropdownMenuItem>
+                </Link>
               </DropdownMenuGroup>
 
               <DropdownMenuSeparator />

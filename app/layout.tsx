@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Kanit } from "next/font/google";
 import "./globals.css";
 import Provider from "./session-provider";
 import SWRProvider from "@/components/swr";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +14,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const kanit = Kanit({
+  variable: "--font-kanit",
+  subsets: ["thai"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -26,15 +33,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SWRProvider>
-          <Provider>
-            {children} <Toaster />
-          </Provider>
-        </SWRProvider>
+    <html lang="th" suppressHydrationWarning>
+      <body className={`${kanit.variable} antialiased min-h-screen`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SWRProvider>
+            <Provider>
+              {children} <Toaster />
+            </Provider>
+          </SWRProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
