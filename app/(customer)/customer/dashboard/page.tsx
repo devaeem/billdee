@@ -25,7 +25,7 @@ const DashboardPage = () => {
       </div> */}
 
           {/* Filters */}
-          <SalesFilter onFilterChange={(filters) => console.log(filters)} />
+          <SalesFilter />
 
           {/* Stats Overview */}
           <div className="grid grid-cols-3 gap-4">
