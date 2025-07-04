@@ -13,7 +13,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { toast } from "sonner";
 
@@ -41,6 +40,7 @@ export function NotificationsForm() {
   });
 
   function onSubmit(data: NotificationsFormValues) {
+    console.log(data, "data");
     toast.success("บันทึกการตั้งค่าเรียบร้อยแล้ว");
   }
 

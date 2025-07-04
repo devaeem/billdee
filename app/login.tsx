@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
@@ -16,7 +15,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -44,30 +42,30 @@ const loginFormSchema = z.object({
 });
 
 // Register form schema
-const registerFormSchema = z
-  .object({
-    storeName: z
-      .string()
-      .min(2, { message: "ชื่อร้านค้าต้องมีความยาวอย่างน้อย 2 ตัวอักษร" }),
-    email: z
-      .string()
-      .min(1, { message: "กรุณากรอกอีเมล" })
-      .email("รูปแบบอีเมลไม่ถูกต้อง"),
-    phoneNumber: z
-      .string()
-      .min(10, { message: "เบอร์โทรศัพท์ต้องมีความยาว 10 หลัก" })
-      .max(10, { message: "เบอร์โทรศัพท์ต้องมีความยาว 10 หลัก" }),
-    password: z
-      .string()
-      .min(6, { message: "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร" }),
-    confirmPassword: z
-      .string()
-      .min(6, { message: "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร" }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "รหัสผ่านไม่ตรงกัน",
-    path: ["confirmPassword"],
-  });
+// const registerFormSchema = z
+//   .object({
+//     storeName: z
+//       .string()
+//       .min(2, { message: "ชื่อร้านค้าต้องมีความยาวอย่างน้อย 2 ตัวอักษร" }),
+//     email: z
+//       .string()
+//       .min(1, { message: "กรุณากรอกอีเมล" })
+//       .email("รูปแบบอีเมลไม่ถูกต้อง"),
+//     phoneNumber: z
+//       .string()
+//       .min(10, { message: "เบอร์โทรศัพท์ต้องมีความยาว 10 หลัก" })
+//       .max(10, { message: "เบอร์โทรศัพท์ต้องมีความยาว 10 หลัก" }),
+//     password: z
+//       .string()
+//       .min(6, { message: "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร" }),
+//     confirmPassword: z
+//       .string()
+//       .min(6, { message: "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร" }),
+//   })
+//   .refine((data) => data.password === data.confirmPassword, {
+//     message: "รหัสผ่านไม่ตรงกัน",
+//     path: ["confirmPassword"],
+//   });
 
 // Reset password form schema
 const resetPasswordFormSchema = z.object({
@@ -78,7 +76,7 @@ const resetPasswordFormSchema = z.object({
 });
 
 type LoginFormValues = z.infer<typeof loginFormSchema>;
-type RegisterFormValues = z.infer<typeof registerFormSchema>;
+// type RegisterFormValues = z.infer<typeof registerFormSchema>;
 type ResetPasswordFormValues = z.infer<typeof resetPasswordFormSchema>;
 
 const Login = () => {
@@ -96,7 +94,6 @@ const Login = () => {
     },
   });
 
-  // Load remembered email on component mount
   useEffect(() => {
     const rememberedEmail = localStorage.getItem("rememberedEmail");
     if (rememberedEmail) {
@@ -106,16 +103,16 @@ const Login = () => {
   }, [loginForm]);
 
   // Register form
-  const registerForm = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerFormSchema),
-    defaultValues: {
-      storeName: "",
-      email: "",
-      phoneNumber: "",
-      password: "",
-      confirmPassword: "",
-    },
-  });
+  // const registerForm = useForm<RegisterFormValues>({
+  //   resolver: zodResolver(registerFormSchema),
+  //   defaultValues: {
+  //     storeName: "",
+  //     email: "",
+  //     phoneNumber: "",
+  //     password: "",
+  //     confirmPassword: "",
+  //   },
+  // });
 
   // Reset password form
   const resetPasswordForm = useForm<ResetPasswordFormValues>({
@@ -155,7 +152,7 @@ const Login = () => {
   };
 
   const handleResetPassword = async (data: ResetPasswordFormValues) => {
-    // TODO: Implement password reset logic
+    console.log(data, "data");
     await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
     toast.success("ส่งลิงก์รีเซ็ตรหัสผ่านแล้ว", {
       description: "กรุณาตรวจสอบอีเมลของคุณ",
@@ -164,19 +161,19 @@ const Login = () => {
     resetPasswordForm.reset();
   };
 
-  const handleRegister = async (data: RegisterFormValues) => {
-    // TODO: Implement registration logic
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
-    toast.success("สมัครสมาชิกสำเร็จ", {
-      description: "กำลังนำคุณไปยังหน้าเข้าสู่ระบบ",
-    });
-    setFormState("login");
-    registerForm.reset();
-  };
+  // const handleRegister = async (data: RegisterFormValues) => {
+  //   // TODO: Implement registration logic
+  //   await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+  //   toast.success("สมัครสมาชิกสำเร็จ", {
+  //     description: "กำลังนำคุณไปยังหน้าเข้าสู่ระบบ",
+  //   });
+  //   setFormState("login");
+  //   registerForm.reset();
+  // };
 
-  const handleRegisterClick = () => {
-    setShowRegisterAlert(true);
-  };
+  // const handleRegisterClick = () => {
+  //   setShowRegisterAlert(true);
+  // };
 
   return (
     <>
@@ -285,7 +282,7 @@ const Login = () => {
                       <div className="text-lg font-semibold text-blue-900">
                         ขั้นตอนการสมัครสมาชิก
                       </div>
-                      <div className="text-blue-700 space-y-2">
+                      <div className="text-blue-600 space-y-2">
                         <p>
                           เพื่อให้เราสามารถให้บริการที่ดีที่สุด
                           กรุณาติดต่อเราโดยตรงเพื่อเปิดบัญชีใช้งาน
@@ -294,7 +291,7 @@ const Login = () => {
                       </div>
                       <Button
                         type="button"
-                        className="w-full h-14 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-2xl"
+                        className="w-full h-10 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-2xl"
                         onClick={() =>
                           window.open(
                             "https://www.facebook.com/jatupon.dawruang",

@@ -52,6 +52,7 @@ export function ProfileForm() {
   });
 
   function onSubmit(data: ProfileFormValues) {
+    console.log(data, "data");
     toast.success("บันทึกการตั้งค่าเรียบร้อยแล้ว");
   }
 

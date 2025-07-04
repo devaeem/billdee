@@ -1,14 +1,16 @@
+// @typescript-eslint/no-empty-object-type
 import axiosInstance from "@/app/utils/axios";
+import { AxiosError } from "axios";
 import NextAuth from "next-auth";
 import { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 interface CustomUser {
   id: string;
-  email: string;
-  access_token: string;
-  accessToken: string;
-  refresh_token: string;
+  email?: string;
+  access_token?: string;
+  accessToken?: string;
+  refresh_token?: string;
   role?: string;
 }
 
@@ -51,13 +53,12 @@ export const authOptions: AuthOptions = {
         try {
           const login = await axiosInstance.post("/auth/sign-in", credentials);
           const userData = login.data.data;
+          console.log("userData", userData);
 
-          if (userData && userData.access_token) {
+          if (userData && userData.accessToken) {
             const user: CustomUser = {
-              access_token: userData.access_token,
-              accessToken: userData.access_token,
-              refresh_token: userData.refresh_token,
-              id: userData.id,
+              accessToken: userData.accessToken,
+              id: userData.role,
               email: userData.email,
               role: userData.role,
             };
@@ -65,6 +66,9 @@ export const authOptions: AuthOptions = {
           }
           return null;
         } catch (error) {
+          if (error instanceof AxiosError) {
+            console.log("error", error.response?.data.message);
+          }
           throw new Error("Invalid credentials");
         }
       },
@@ -73,8 +77,7 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.accessToken = user.access_token;
-        token.refreshToken = user.refresh_token;
+        token.accessToken = user.accessToken;
         token.id = user.id;
         token.email = user.email || "";
         token.role = user.role || "";
@@ -82,9 +85,9 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      console.log("token", token);
       if (token) {
         session.accessToken = token.accessToken;
-        session.refreshToken = token.refreshToken;
         session.user.id = token.id;
         session.user.email = token.email || "";
         session.user.role = token.role || "";

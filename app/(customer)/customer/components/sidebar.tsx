@@ -7,14 +7,13 @@ import {
   HomeIcon,
   ShoppingBagIcon,
   ReceiptIcon,
-  UserIcon,
   BellIcon,
   SparklesIcon,
   SettingsIcon,
 } from "lucide-react";
 
 const navigation = [
-  { name: "หน้าหลัก", href: "/customer", icon: HomeIcon },
+  { name: "หน้าหลัก", href: "/customer/dashboard", icon: HomeIcon },
   { name: "สินค้า", href: "/customer/product", icon: ShoppingBagIcon },
   { name: "รายการบิล", href: "/customer/bill", icon: ReceiptIcon },
   { name: "บันทึกค่าใช้จ่าย", href: "/customer/notifications", icon: BellIcon },
@@ -26,7 +25,7 @@ const Sidebar = () => {
 
   return (
     <div className="flex h-[100dvh] flex-col border-r bg-white">
-      <div className="flex-1 overflow-y-auto px-3 pt-4">
+      <div className="flex-1 overflow-y-auto px-4 pt-4">
         <nav className="flex flex-col h-full">
           <ul role="list" className="-mx-2 space-y-1">
             {navigation.map((item) => {

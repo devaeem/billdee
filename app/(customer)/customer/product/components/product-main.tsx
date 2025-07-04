@@ -1,6 +1,5 @@
 "use client";
 import Paginations from "@/components/custom-ui/pagination";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 import React, { useState } from "react";
@@ -14,7 +13,6 @@ interface Product {
 const ProductMain = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [totalItems, setTotalItems] = useState(10);
   const [isOpen, setIsOpen] = useState(false);
 
   const columns: ColumnDef<Product>[] = [
@@ -42,7 +40,7 @@ const ProductMain = () => {
 
         <DataTable data={data} columns={columns} />
         <Paginations
-          totalItems={totalItems}
+          totalItems={10}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onPageChange={setCurrentPage}

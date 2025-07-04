@@ -3,7 +3,6 @@ import React from "react";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -41,7 +40,7 @@ const Paginations = ({
   };
 
   const renderPageNumbers = () => {
-    let pages = [];
+    const pages = [];
 
     for (let i = 1; i <= totalPages; i++) {
       pages.push(

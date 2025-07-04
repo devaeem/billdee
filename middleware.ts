@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   console.log(token, "token");
   const isAuthenticated = !!token;
-  const userRole = token?.role || "user"; // Default to 'user' if no role specified
+  const userRole = token?.role || "USER"; // Default to 'user' if no role specified
 
   // Define public paths that don't require authentication
   const publicPaths = ["/"];
@@ -27,7 +27,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // If user is trying to access admin paths but doesn't have admin role
-  if (isAuthenticated && isAdminPath && userRole !== "admin") {
+  if (isAuthenticated && isAdminPath && userRole !== "ADMIN") {
     // Redirect to dashboard if user tries to access admin routes
     return NextResponse.redirect(new URL("/customer", request.url));
   }
@@ -35,7 +35,7 @@ export async function middleware(request: NextRequest) {
   // If the user is authenticated and trying to access public paths
   if (isAuthenticated && isPublicPath) {
     // Redirect based on role
-    const redirectPath = userRole === "admin" ? "/dashboard" : "/dashboard";
+    const redirectPath = userRole === "ADMIN" ? "/dashboard" : "/dashboard";
     return NextResponse.redirect(new URL(redirectPath, request.url));
   }
 

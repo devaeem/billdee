@@ -5,15 +5,12 @@ import {
   IconCamera,
   IconChartBar,
   IconDashboard,
-  IconDatabase,
   IconFileAi,
   IconFileDescription,
-  IconFileWord,
   IconFolder,
   IconHelp,
   IconInnerShadowTop,
   IconListDetails,
-  IconReport,
   IconSearch,
   IconSettings,
   IconUsers,
@@ -30,7 +27,6 @@ import {
 } from "@/components/ui/sidebar";
 import { NavMain } from "./nav-main";
 import { NavSecondary } from "./nav-secondary";
-import { NavDocuments } from "./nav-documents";
 import { NavUser } from "./nav-user";
 import { useSession } from "next-auth/react";
 
@@ -153,7 +149,6 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session } = useSession();
-  console.log("session", session);
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>

@@ -12,7 +12,7 @@ export function useProfile() {
   }, []);
 
   const { data, isLoading, error, mutate } = useSWR(
-    isClient ? "/auth/profile" : null,
+    isClient ? "/iam/me" : null,
     {
       // Don't consider 401 as an error - it's an expected state
       onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
@@ -32,7 +32,7 @@ export function useProfile() {
       fallbackData: { data: null, isAuthenticated: false },
     }
   );
-  console.log(data, "profile-data");
+  console.log("profile-data", data);
 
   // For unauthenticated users, provide a standardized response
   const result = {

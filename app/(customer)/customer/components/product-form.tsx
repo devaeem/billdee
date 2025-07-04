@@ -6,13 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardTitle,
-  CardHeader,
-  CardContent,
-  CardDescription,
-} from "@/components/ui/card";
+
 import {
   Form,
   FormControl,
@@ -21,14 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -109,9 +95,9 @@ export function ProductForm() {
     <div className="space-y-4">
       <div className="flex items-center space-x-2">
         <Package2 className="w-8 h-8 text-orange-500" />
-        <CardTitle>
+        <div>
           <h3 className="text-2xl font-semibold text-black">เพิ่มสินค้าใหม่</h3>
-        </CardTitle>
+        </div>
       </div>
 
       <Form {...form}>

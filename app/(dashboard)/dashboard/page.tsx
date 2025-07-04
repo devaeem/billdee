@@ -1,8 +1,3 @@
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-
-import data from "./data.json";
-import { AppSidebar } from "./components/app-sidebar";
-import { SiteHeader } from "./components/site-header";
 import { ChartAreaInteractive } from "./components/chart-area-interactive";
 import { SectionCards } from "./components/section-cards";
 import { DataTable } from "./components/data-table";

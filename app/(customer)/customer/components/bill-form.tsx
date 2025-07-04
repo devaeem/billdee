@@ -21,14 +21,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import { Receipt, User, Calendar, FileText, Plus, Phone } from "lucide-react";

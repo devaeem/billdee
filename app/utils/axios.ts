@@ -2,7 +2,7 @@ import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { getSession } from "next-auth/react";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v2",
   withCredentials: true,
   timeout: 10000,
   headers: {
