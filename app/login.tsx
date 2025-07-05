@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -40,6 +39,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import Input from "@/components/custom-ui/input";
+import Btn from "@/components/custom-ui/btn";
 
 type FormState = "login" | "forgot-password" | "register";
 
@@ -218,7 +219,7 @@ const Login = () => {
               <>
                 {/* Forgot Password Form */}
                 <div className="space-y-2">
-                  <Button
+                  <Btn
                     type="button"
                     variant="ghost"
                     onClick={() => setFormState("login")}
@@ -226,7 +227,7 @@ const Login = () => {
                   >
                     <ArrowLeft className="w-5 h-5 mr-2" />
                     <span>กลับไปหน้าเข้าสู่ระบบ</span>
-                  </Button>
+                  </Btn>
                   <h1 className="text-3xl font-bold text-gray-900">
                     ลืมรหัสผ่าน?
                   </h1>
@@ -260,7 +261,7 @@ const Login = () => {
                       )}
                     />
 
-                    <Button
+                    <Btn
                       type="submit"
                       disabled={resetPasswordForm.formState.isSubmitting}
                       className="w-full h-14 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 rounded-2xl text-base font-medium transition-all duration-300"
@@ -273,7 +274,7 @@ const Login = () => {
                       ) : (
                         "ส่งลิงก์รีเซ็ตรหัสผ่าน"
                       )}
-                    </Button>
+                    </Btn>
                   </form>
                 </Form>
               </>
@@ -281,7 +282,7 @@ const Login = () => {
               <>
                 {/* Register Info */}
                 <div className="space-y-2">
-                  <Button
+                  <Btn
                     type="button"
                     variant="ghost"
                     onClick={() => setFormState("login")}
@@ -291,7 +292,7 @@ const Login = () => {
                     <span className="tracking-wider">
                       กลับไปหน้าเข้าสู่ระบบ
                     </span>
-                  </Button>
+                  </Btn>
                   <h1 className="text-3xl font-bold text-gray-900 tracking-wider">
                     สมัครสมาชิก
                   </h1>
@@ -313,7 +314,7 @@ const Login = () => {
                         </p>
                         <p className="font-medium">📘 FB: Jatupon Dawruang</p>
                       </div>
-                      <Button
+                      <Btn
                         type="button"
                         className="w-full h-10 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-2xl"
                         onClick={() =>
@@ -324,20 +325,19 @@ const Login = () => {
                         }
                       >
                         ติดต่อผ่าน Facebook
-                      </Button>
+                      </Btn>
                     </div>
                   </div>
 
                   <div className="text-center text-sm text-gray-600">
                     มีบัญชีอยู่แล้ว?{" "}
-                    <Button
+                    <Btn
                       type="button"
-                      variant="link"
                       onClick={() => setFormState("login")}
                       className="text-red-500 hover:text-red-600 font-medium h-auto p-0"
                     >
                       เข้าสู่ระบบ
-                    </Button>
+                    </Btn>
                   </div>
                 </div>
               </>
@@ -360,55 +360,25 @@ const Login = () => {
                     className="space-y-6"
                   >
                     <div className="flex flex-col gap-4">
-                      <FormField
-                        control={loginForm.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input
-                                placeholder="อีเมล"
-                                type="email"
-                                className="h-14 bg-gray-50 border-0 rounded-2xl text-base focus:ring-2 focus:ring-red-500"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+                      <Input
+                        placeholder="อีเมล"
+                        type="email"
+                        className="h-14 bg-gray-50 border-0 rounded-2xl text-base focus:ring-2 focus:ring-red-500"
+                        {...loginForm.register("email")}
                       />
-                      <FormField
-                        control={loginForm.control}
-                        name="password"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <div className="relative">
-                                <Input
-                                  type={showPassword ? "text" : "password"}
-                                  placeholder="password"
-                                  className="h-14 bg-gray-50 border-0 rounded-2xl text-base focus:ring-2 focus:ring-red-500 pr-10"
-                                  {...field}
-                                />
-
-                                <HugeiconsIcon
-                                  icon={
-                                    showPassword ? ViewOffSlashIcon : ViewIcon
-                                  }
-                                  size={24}
-                                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-900"
-                                  color="currentColor"
-                                  strokeWidth={1.5}
-                                  onClick={() => {
-                                    setShowPassword(!showPassword);
-                                  }}
-                                />
-                                {/* <EyeIcon className="w-6 h-6 " /> */}
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="password"
+                        className="h-14 bg-gray-50 border-0 rounded-2xl text-base focus:ring-2 focus:ring-red-500 pr-10"
+                        {...loginForm.register("password")}
+                        endIcon={
+                          <HugeiconsIcon
+                            icon={showPassword ? ViewOffSlashIcon : ViewIcon}
+                            size={24}
+                            className="text-gray-600"
+                            onClick={() => setShowPassword(!showPassword)}
+                          />
+                        }
                       />
                     </div>
 
@@ -436,17 +406,16 @@ const Login = () => {
                           )}
                         />
                       </div>
-                      <Button
+                      <Btn
                         type="button"
-                        variant="link"
+                        variant="ghost"
                         onClick={() => setFormState("forgot-password")}
-                        className="text-sm text-red-500 hover:text-red-600 font-medium h-auto p-0 hover:no-underline"
                       >
                         ลืมรหัสผ่าน?
-                      </Button>
+                      </Btn>
                     </div>
 
-                    <Button
+                    <Btn
                       type="submit"
                       disabled={loginForm.formState.isSubmitting}
                       className="w-full h-14 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 rounded-2xl text-base font-medium transition-all duration-300"
@@ -459,18 +428,17 @@ const Login = () => {
                       ) : (
                         "เข้าสู่ระบบ"
                       )}
-                    </Button>
+                    </Btn>
 
-                    <div className="text-center text-sm text-gray-600 tracking-wider">
+                    <div className="text-center text-sm text-gray-600 tracking-wider flex items-center justify-center ">
                       ยังไม่มีบัญชีกับเรา??{" "}
-                      <Button
+                      <Btn
                         type="button"
-                        variant="link"
+                        variant="ghost"
                         onClick={() => setFormState("register")}
-                        className="text-red-500 hover:text-red-600 font-medium h-auto p-0 tracking-wider"
                       >
                         สมัครใช้งาน
-                      </Button>
+                      </Btn>
                     </div>
                   </form>
                 </Form>
@@ -674,14 +642,14 @@ const Login = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction asChild>
-              <Button
+              <Btn
                 className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
                 onClick={() =>
                   window.open("https://www.facebook.com/jatupon.dr", "_blank")
                 }
               >
                 ติดต่อผ่าน Facebook
-              </Button>
+              </Btn>
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
