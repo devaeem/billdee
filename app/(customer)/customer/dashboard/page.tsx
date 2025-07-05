@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SalesChart from "./components/sales-chart";
 import StorePerformance from "./components/store-performance";
 import SalesDistribution from "./components/sales-distribution";
@@ -15,21 +15,41 @@ const DashboardPage = () => {
   };
 
   const shopehas = true;
+  const [greeting, setGreeting] = useState("");
+
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      setGreeting("สวัสดีตอนเช้า");
+    } else if (hour >= 12 && hour < 17) {
+      setGreeting("สวัสดีตอนบ่าย");
+    } else if (hour >= 17 && hour < 21) {
+      setGreeting("สวัสดีตอนเย็น");
+    } else {
+      setGreeting("สวัสดีตอนกลางคืน");
+    }
+  }, []);
 
   return (
     <>
       {shopehas ? (
-        <div className="p-2    flex flex-col gap-3">
-          {/* <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold   ">แดชบอร์ด</h1>
-      </div> */}
+        <div className="p-6 flex flex-col gap-6">
+          {/* Greeting Section */}
+          <div className="bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg p-6 shadow-sm">
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+              {greeting}! 👋
+            </h1>
+            <p className="text-gray-600">
+              ยินดีต้อนรับกลับมา มาดูผลการดำเนินงานของร้านค้าของคุณกัน
+            </p>
+          </div>
 
           {/* Filters */}
           <SalesFilter />
 
           {/* Stats Overview */}
-          <div className="grid grid-cols-3 gap-4">
-            <Card className="bg-white hover:shadow-lg transition-shadow">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   ยอดขายทั้งหมด
@@ -44,7 +64,7 @@ const DashboardPage = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-white hover:shadow-lg transition-shadow">
+            <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   จำนวนออเดอร์
@@ -59,7 +79,7 @@ const DashboardPage = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-white hover:shadow-lg transition-shadow">
+            <Card className="bg-white hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   ร้านค้าที่ใช้งาน
@@ -77,7 +97,7 @@ const DashboardPage = () => {
           </div>
 
           {/* Charts and Tables */}
-          <div className="grid grid-cols-7 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
             <SalesChart />
             <SalesDistribution />
           </div>

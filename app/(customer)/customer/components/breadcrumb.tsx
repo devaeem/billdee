@@ -25,6 +25,7 @@ const routes: Record<string, string> = {
   "/customer/record-expenses/create": "สร้างรายการค่าใช้จ่าย",
   "/customer/seeting-shop": "ตั้งค่าร้านค้า",
   "/customer/profile-user": "โปรไฟล์",
+  "/customer/pos": "POS ขายหน้าร้าน",
 };
 
 const thaiDayNames = [

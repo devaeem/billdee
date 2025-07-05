@@ -32,7 +32,6 @@ export function useProfile() {
       fallbackData: { data: null, isAuthenticated: false },
     }
   );
-  console.log("profile-data", data);
 
   // For unauthenticated users, provide a standardized response
   const result = {

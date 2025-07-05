@@ -47,6 +47,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Skeleton } from "@/components/ui/skeleton";
+import { navigation } from "./sidebar";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 const getBackgroundColor = (letter: string = "") => {
   const normalizedLetter = letter.toLowerCase();
@@ -65,24 +67,6 @@ const HeaderCus = () => {
   const { data: profile, isLoading } = useProfile();
   const router = useRouter();
   const pathname = usePathname();
-
-  const navigation = [
-    {
-      name: "หน้าแรก",
-      href: "/customer",
-      icon: IconHome,
-    },
-    {
-      name: "จัดการบิล",
-      href: "/customer/bill",
-      icon: IconFileInvoice,
-    },
-    {
-      name: "สินค้า",
-      href: "/customer/product",
-      icon: IconPackage,
-    },
-  ];
 
   // Add subscription level mapping with proper typing
   type SubscriptionType = "SPARK" | "FLOOR" | "MOMO" | "INFINITY";
@@ -279,11 +263,21 @@ const HeaderCus = () => {
               <div className="flex items-center gap-3 p-1">
                 <div className="h-8 w-8 rounded-full bg-gradient-to-br from-red-500 to-orange-500 shadow-lg ring-2 ring-primary/10" />
                 <span className="flex flex-col">
-                  <span className="text-xl font-semibold tracking-widest uppercase">
-                    BillDee
+                  <span className="flex items-center gap-2">
+                    <span className="text-xl font-extrabold tracking-widest uppercase hover:text-orange-500 transition-colors duration-200">
+                      BillDee
+                    </span>
+                    <Badge
+                      className={cn(
+                        "text-white font-extrabold uppercase px-1 py-1 text-xs rounded-full transition-all duration-300 hover:scale-105",
+                        subscriptionLevel.styles[subscriptionLevel.type]
+                      )}
+                    >
+                      {subscriptionLevel.type}
+                    </Badge>
                   </span>
-                  <span className="text-xs text-muted-foreground">
-                    ระบบบิลออนไลน์ที่ครบวงจร
+                  <span className="text-xs font-bold text-muted-foreground tracking-wide">
+                    ระบบบิลออนไลน์และจัดการร้านค้า
                   </span>
                 </span>
               </div>
@@ -293,7 +287,6 @@ const HeaderCus = () => {
           <div className="flex flex-1 flex-col space-y-2  pt-1 px-2">
             <nav className="flex flex-col space-y-1">
               {navigation.map((item) => {
-                const Icon = item.icon;
                 const isActive = pathname === item.href;
                 return (
                   <Link
@@ -301,13 +294,30 @@ const HeaderCus = () => {
                     href={item.href}
                     className={cn(
                       isActive
-                        ? "bg-orange-50 text-orange-600"
+                        ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"
                         : "text-gray-700 hover:bg-orange-50 hover:text-orange-600",
-                      "group flex gap-x-3 rounded-md p-2.5 text-sm font-semibold leading-6 transition-all duration-200"
+                      "group flex items-center gap-x-3 rounded-md p-2.5 text-sm font-semibold leading-6 transition-all duration-200"
                     )}
                   >
-                    <Icon className="size-4.5" />
-                    {item.name}
+                    <HugeiconsIcon
+                      icon={item.icon}
+                      size={24}
+                      className={cn(
+                        isActive
+                          ? "text-white"
+                          : "text-gray-700 group-hover:text-orange-600",
+                        "h-5 w-5 shrink-0 transition-colors"
+                      )}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className={cn(
+                        "text-sm font-bold  text-muted-foreground transition-all duration-200 tracking-wider",
+                        isActive && "text-white font-bold"
+                      )}
+                    >
+                      {item.name}
+                    </span>
                   </Link>
                 );
               })}
@@ -333,11 +343,11 @@ const HeaderCus = () => {
                       {profile?.data?.firstName?.charAt(0) || "U"}
                     </AvatarFallback>
                   </Avatar>
-                  <div className="hidden text-left text-sm leading-tight transition-opacity duration-200 md:grid">
-                    <span className="font-medium">
+                  <div className=" flex flex-col text-left text-sm leading-tight transition-opacity duration-200 md:grid">
+                    <span className="font-bold">
                       {profile?.data?.firstName}
                     </span>
-                    <span className="text-xs text-muted-foreground/90">
+                    <span className="text-xs text-muted-foreground">
                       {profile?.data?.email}
                     </span>
                   </div>
@@ -487,7 +497,9 @@ const HeaderCus = () => {
                   </>
                 ) : (
                   <>
-                    <span className="font-bold">Hello,ทัตติมาพงศ์</span>
+                    <span className="font-bold">
+                      Hello, {profile?.data?.firstName}
+                    </span>
                     <span className="text-xs text-muted-foreground/90">
                       {profile?.data?.email}
                     </span>

@@ -13,7 +13,6 @@ export default function SWRProvider({
     <SWRConfig
       value={{
         fetcher: async (url: string) => {
-          console.log(url, "url");
           const res: AxiosResponse = await axiosInstance.get(url);
           return res;
         },

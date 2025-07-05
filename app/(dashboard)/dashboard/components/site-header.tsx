@@ -29,7 +29,6 @@ import Link from "next/link";
 
 export function SiteHeader() {
   const { data: profile } = useProfile();
-  console.log("profile", profile);
 
   // Mock user data - replace with actual user data from your auth system
 

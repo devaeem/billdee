@@ -14,13 +14,15 @@ import {
 
 const SalesFilter = () => {
   return (
-    <Card className="col-span-7">
+    <Card className="col-span-full">
       <CardContent className="pt-6">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="dateRange">ช่วงเวลา</Label>
+            <Label htmlFor="dateRange" className="text-sm font-medium">
+              ช่วงเวลา
+            </Label>
             <Select defaultValue="thisMonth">
-              <SelectTrigger>
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="เลือกช่วงเวลา" />
               </SelectTrigger>
               <SelectContent>
@@ -33,7 +35,9 @@ const SalesFilter = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="minSales">ยอดขายต่ำสุด</Label>
+            <Label htmlFor="minSales" className="text-sm font-medium">
+              ยอดขายต่ำสุด
+            </Label>
             <Input
               id="minSales"
               type="number"
@@ -43,7 +47,9 @@ const SalesFilter = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="maxSales">ยอดขายสูงสุด</Label>
+            <Label htmlFor="maxSales" className="text-sm font-medium">
+              ยอดขายสูงสุด
+            </Label>
             <Input
               id="maxSales"
               type="number"
@@ -53,9 +59,11 @@ const SalesFilter = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="store">ร้านค้า</Label>
+            <Label htmlFor="store" className="text-sm font-medium">
+              ร้านค้า
+            </Label>
             <Select defaultValue="all">
-              <SelectTrigger>
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="เลือกร้านค้า" />
               </SelectTrigger>
               <SelectContent>

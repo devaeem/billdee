@@ -43,32 +43,50 @@ const storeData = [
 
 const StorePerformance = () => {
   return (
-    <Card className="col-span-3">
+    <Card className="col-span-full">
       <CardHeader>
-        <CardTitle>ผลการดำเนินงานร้านค้า</CardTitle>
-        <CardDescription>รายงานผลการดำเนินงานของร้านค้าทั้งหมด</CardDescription>
+        <CardTitle className="text-lg sm:text-xl">
+          ผลการดำเนินงานร้านค้า
+        </CardTitle>
+        <CardDescription className="text-sm sm:text-base">
+          รายงานผลการดำเนินงานของร้านค้าทั้งหมด
+        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>ชื่อร้านค้า</TableHead>
-              <TableHead>ยอดขายรวม</TableHead>
-              <TableHead>จำนวนออเดอร์</TableHead>
-              <TableHead>ผลงาน</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {storeData.map((store) => (
-              <TableRow key={store.id}>
-                <TableCell>{store.name}</TableCell>
-                <TableCell>฿{store.totalSales.toLocaleString()}</TableCell>
-                <TableCell>{store.orders}</TableCell>
-                <TableCell>{store.performance}</TableCell>
+      <CardContent className="overflow-x-auto">
+        <div className="min-w-[600px]">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[200px]">ชื่อร้านค้า</TableHead>
+                <TableHead className="w-[200px]">ยอดขายรวม</TableHead>
+                <TableHead className="w-[150px]">จำนวนออเดอร์</TableHead>
+                <TableHead className="w-[150px]">ผลงาน</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {storeData.map((store) => (
+                <TableRow key={store.id}>
+                  <TableCell className="font-medium">{store.name}</TableCell>
+                  <TableCell>฿{store.totalSales.toLocaleString()}</TableCell>
+                  <TableCell>{store.orders}</TableCell>
+                  <TableCell>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        store.performance === "ดีมาก"
+                          ? "bg-green-100 text-green-800"
+                          : store.performance === "ดี"
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-yellow-100 text-yellow-800"
+                      }`}
+                    >
+                      {store.performance}
+                    </span>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </CardContent>
     </Card>
   );

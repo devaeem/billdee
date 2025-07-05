@@ -19,7 +19,6 @@ export const authOptions: AuthOptions = {
         try {
           const login = await axiosInstance.post("/auth/sign-in", credentials);
           const userData = login.data.data;
-          console.log("userData", userData);
 
           if (userData && userData.accessToken) {
             const user = {
@@ -51,7 +50,6 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      console.log("token", token);
       if (token) {
         session.accessToken = token.accessToken;
         session.user.id = token.id;
