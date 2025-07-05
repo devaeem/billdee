@@ -1,12 +1,7 @@
 import React from "react";
-import { BillForm } from "../components/bill-form";
-
+import BillMain from "./components/bill-main";
 const Bill = () => {
-  return (
-    <div className="flex flex-col gap-4 p-4 lg:px-6">
-      <BillForm />
-    </div>
-  );
+  return <BillMain />;
 };
 
 export default Bill;

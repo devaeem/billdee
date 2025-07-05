@@ -16,17 +16,25 @@ const navigation = [
   { name: "หน้าหลัก", href: "/customer/dashboard", icon: HomeIcon },
   { name: "สินค้า", href: "/customer/product", icon: ShoppingBagIcon },
   { name: "รายการบิล", href: "/customer/bill", icon: ReceiptIcon },
-  { name: "บันทึกค่าใช้จ่าย", href: "/customer/notifications", icon: BellIcon },
-  { name: "ตั้งค่าร้านค้า", href: "/customer/profile", icon: SettingsIcon },
+  {
+    name: "บันทึกค่าใช้จ่าย",
+    href: "/customer/record-expenses",
+    icon: BellIcon,
+  },
+  {
+    name: "ตั้งค่าร้านค้า",
+    href: "/customer/seeting-shop",
+    icon: SettingsIcon,
+  },
 ];
 
 const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex h-[100dvh] flex-col border-r bg-white">
+    <div className="flex h-[100dvh] flex-col border-r border-slate-200 bg-white shadow-md">
       <div className="flex-1 overflow-y-auto px-4 pt-4">
-        <nav className="flex flex-col h-full">
+        <nav className="flex flex-col h-full ">
           <ul role="list" className="-mx-2 space-y-1">
             {navigation.map((item) => {
               const isActive = pathname === item.href;
@@ -36,21 +44,28 @@ const Sidebar = () => {
                     href={item.href}
                     className={cn(
                       isActive
-                        ? "bg-orange-50 text-orange-600"
+                        ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"
                         : "text-gray-700 hover:bg-orange-50 hover:text-orange-600",
-                      "group flex gap-x-3 rounded-md p-2.5 text-sm font-semibold leading-6 transition-all duration-200"
+                      "group flex items-center gap-x-3 rounded-md p-2.5 text-sm font-semibold leading-6 transition-all duration-200"
                     )}
                   >
                     <item.icon
                       className={cn(
                         isActive
-                          ? "text-orange-600"
+                          ? "text-white"
                           : "text-gray-400 group-hover:text-orange-600",
                         "h-5 w-5 shrink-0 transition-colors"
                       )}
                       aria-hidden="true"
                     />
-                    {item.name}
+                    <span
+                      className={cn(
+                        "text-sm font-bold  text-muted-foreground transition-all duration-200 tracking-wider",
+                        isActive && "text-white font-bold"
+                      )}
+                    >
+                      {item.name}
+                    </span>
                   </Link>
                 </li>
               );
@@ -58,7 +73,7 @@ const Sidebar = () => {
           </ul>
         </nav>
       </div>
-      <div className="sticky bottom-0 flex-shrink-0 px-3 py-4 border-t bg-white">
+      {/* <div className="sticky bottom-0 flex-shrink-0 px-3 py-4 border-t bg-white">
         <Link href="/customer/upgrade" className="block">
           <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-4 hover:from-orange-600 hover:to-orange-700 transition-all duration-200 cursor-pointer shadow-lg">
             <div className="flex items-center gap-3">
@@ -74,7 +89,7 @@ const Sidebar = () => {
             </div>
           </div>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

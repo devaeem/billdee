@@ -6,10 +6,22 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
-import { MoreVertical, ArrowLeft, Loader2 } from "lucide-react";
+import { MoreVertical, ArrowLeft, Loader2, BoxIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Chart01Icon,
+  Home01Icon,
+  Invoice04Icon,
+  MoreVerticalSquare01Icon,
+  PackageSearchIcon,
+  Settings01Icon,
+  ViewIcon,
+  ViewOffSlashIcon,
+  Wallet01Icon,
+} from "@hugeicons/core-free-icons";
 import {
   Form,
   FormControl,
@@ -26,6 +38,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 type FormState = "login" | "forgot-password" | "register";
 
@@ -83,7 +97,7 @@ const Login = () => {
   const router = useRouter();
   const [formState, setFormState] = useState<FormState>("login");
   const [showRegisterAlert, setShowRegisterAlert] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
   // Login form
   const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -180,15 +194,23 @@ const Login = () => {
       <div className="min-h-screen flex flex-col lg:flex-row">
         {/* Left Side - Login Form */}
         <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-6 lg:p-20">
-          <div className="w-full max-w-[420px] space-y-10">
+          <div className="w-full max-w-[420px] space-y-5">
             {/* Logo and Menu */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-500 rounded-full" />
-                <span className="text-xl font-semibold">BillDee</span>
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-500 rounded" />
+                <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-wider ml-2">
+                  billdee
+                </span>
               </div>
               <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <MoreVertical className="w-5 h-5 text-gray-600" />
+                <HugeiconsIcon
+                  size={24}
+                  icon={MoreVerticalSquare01Icon}
+                  className="text-gray-600"
+                  color="currentColor"
+                  strokeWidth={1.5}
+                />
               </button>
             </div>
 
@@ -266,12 +288,14 @@ const Login = () => {
                     className="flex items-center text-gray-600 hover:text-gray-900 transition-colors mb-6"
                   >
                     <ArrowLeft className="w-5 h-5 mr-2" />
-                    <span>กลับไปหน้าเข้าสู่ระบบ</span>
+                    <span className="tracking-wider">
+                      กลับไปหน้าเข้าสู่ระบบ
+                    </span>
                   </Button>
-                  <h1 className="text-3xl font-bold text-gray-900">
+                  <h1 className="text-3xl font-bold text-gray-900 tracking-wider">
                     สมัครสมาชิก
                   </h1>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 tracking-wider">
                     เริ่มต้นใช้งานระบบจัดการร้านค้าของคุณ
                   </p>
                 </div>
@@ -294,7 +318,7 @@ const Login = () => {
                         className="w-full h-10 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-2xl"
                         onClick={() =>
                           window.open(
-                            "https://www.facebook.com/jatupon.dawruang",
+                            "https://www.facebook.com/jatupon.dr",
                             "_blank"
                           )
                         }
@@ -320,11 +344,11 @@ const Login = () => {
             ) : (
               <>
                 {/* Welcome Text */}
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold text-gray-900">
+                <div className="flex flex-col gap-1 mb-3">
+                  <h1 className="text-3xl font-bold text-gray-900 tracking-wider">
                     เข้าสู่ระบบ
                   </h1>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 tracking-wider">
                     เข้าถึงระบบจัดการร้านค้าและบิลของคุณ
                   </p>
                 </div>
@@ -335,7 +359,7 @@ const Login = () => {
                     onSubmit={loginForm.handleSubmit(handleLogin)}
                     className="space-y-6"
                   >
-                    <div className="space-y-4">
+                    <div className="flex flex-col gap-4">
                       <FormField
                         control={loginForm.control}
                         name="email"
@@ -359,12 +383,28 @@ const Login = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormControl>
-                              <Input
-                                type="password"
-                                placeholder="รหัสผ่าน"
-                                className="h-14 bg-gray-50 border-0 rounded-2xl text-base focus:ring-2 focus:ring-red-500"
-                                {...field}
-                              />
+                              <div className="relative">
+                                <Input
+                                  type={showPassword ? "text" : "password"}
+                                  placeholder="password"
+                                  className="h-14 bg-gray-50 border-0 rounded-2xl text-base focus:ring-2 focus:ring-red-500 pr-10"
+                                  {...field}
+                                />
+
+                                <HugeiconsIcon
+                                  icon={
+                                    showPassword ? ViewOffSlashIcon : ViewIcon
+                                  }
+                                  size={24}
+                                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-900"
+                                  color="currentColor"
+                                  strokeWidth={1.5}
+                                  onClick={() => {
+                                    setShowPassword(!showPassword);
+                                  }}
+                                />
+                                {/* <EyeIcon className="w-6 h-6 " /> */}
+                              </div>
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -373,26 +413,25 @@ const Login = () => {
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center justify-center gap-2">
                         <FormField
                           control={loginForm.control}
                           name="remember"
                           render={({ field }) => (
-                            <FormItem className="flex items-center space-x-2">
+                            <FormItem className="flex items-center gap-2 h-full space-y-0">
                               <FormControl>
                                 <Checkbox
                                   checked={field.value}
                                   onCheckedChange={field.onChange}
-                                  className="rounded-lg border-gray-300 text-red-500 focus:ring-red-500"
+                                  className="rounded border-gray-300 text-red-500 focus:ring-red-500"
                                 />
                               </FormControl>
-                              <label
+                              <Label
                                 htmlFor="remember"
                                 className="text-sm text-gray-600"
-                                onClick={() => field.onChange(!field.value)}
                               >
                                 จดจำฉันไว้
-                              </label>
+                              </Label>
                             </FormItem>
                           )}
                         />
@@ -401,7 +440,7 @@ const Login = () => {
                         type="button"
                         variant="link"
                         onClick={() => setFormState("forgot-password")}
-                        className="text-sm text-red-500 hover:text-red-600 font-medium h-auto p-0"
+                        className="text-sm text-red-500 hover:text-red-600 font-medium h-auto p-0 hover:no-underline"
                       >
                         ลืมรหัสผ่าน?
                       </Button>
@@ -422,19 +461,29 @@ const Login = () => {
                       )}
                     </Button>
 
-                    <div className="text-center text-sm text-gray-600">
-                      ยังไม่มีบัญชี?{" "}
+                    <div className="text-center text-sm text-gray-600 tracking-wider">
+                      ยังไม่มีบัญชีกับเรา??{" "}
                       <Button
                         type="button"
                         variant="link"
                         onClick={() => setFormState("register")}
-                        className="text-red-500 hover:text-red-600 font-medium h-auto p-0"
+                        className="text-red-500 hover:text-red-600 font-medium h-auto p-0 tracking-wider"
                       >
-                        สมัครสมาชิก
+                        สมัครใช้งาน
                       </Button>
                     </div>
                   </form>
                 </Form>
+                <div className="text-center text-sm text-gray-600">
+                  เมื่อเข้าสู่ระบบ ฉันได้ยอมรับ{" "}
+                  <Link href="/privacy-policy" className="text-orange-500">
+                    นโยบายความเป็นส่วนตัว
+                  </Link>{" "}
+                  และ{" "}
+                  <Link href="/terms-of-service" className="text-orange-500">
+                    เงื่อนไขการใช้บริการ
+                  </Link>
+                </div>
               </>
             )}
           </div>
@@ -442,25 +491,168 @@ const Login = () => {
 
         {/* Right Side - Gradient Background with Image */}
         <div className="hidden lg:block w-1/2 bg-gradient-to-br from-red-500 to-orange-500 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.2),transparent_60%)]" />
+          {/* Decorative background elements */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.2),transparent_60%)]" />
+            <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,rgba(255,255,255,0.1)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.1)_50%,rgba(255,255,255,0.1)_75%,transparent_75%)] bg-[length:100px_100px] opacity-20" />
+          </div>
+
+          {/* Main content container */}
           <div className="absolute inset-0 flex items-center justify-center p-20">
-            <div className="w-full max-w-xl aspect-[4/3] bg-white/10 backdrop-blur-sm rounded-[3rem] shadow-2xl transform -rotate-12 overflow-hidden">
+            <div className="w-full max-w-xl bg-white/10 backdrop-blur-sm rounded-[3rem] shadow-2xl transform -rotate-12 overflow-hidden transition-all duration-500 hover:rotate-0 hover:scale-105">
               <div className="p-8">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div className="text-white text-2xl font-bold">
-                      ฿40,832.32
+                {/* Header section */}
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center animate-float-slow">
+                        <HugeiconsIcon
+                          icon={Invoice04Icon}
+                          size={24}
+                          className="text-white"
+                          color="currentColor"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-white text-lg font-bold tracking-wider uppercase">
+                          BillDee
+                        </h3>
+                        <p className="text-white/80 text-sm tracking-wider font-medium">
+                          ระบบบิลออนไลน์ | จัดการบิลและค่าใช้จ่าย
+                        </p>
+                      </div>
                     </div>
-                    <div className="w-8 h-8 bg-white/20 rounded-full" />
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+                      <span className="text-white/80 text-sm">ออนไลน์</span>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    {[...Array(6)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="h-24 bg-white/20 rounded-2xl transform transition-transform hover:scale-105"
-                      />
-                    ))}
+
+                  {/* Stats overview */}
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="bg-white/20 rounded-2xl p-4 animate-float-slow">
+                      <p className="text-white/80 text-sm mb-1">รายได้วันนี้</p>
+                      <h4 className="text-white text-2xl font-bold tracking-wider">
+                        ฿X,XXX.XX
+                      </h4>
+                      <p className="text-green-700 text-sm mt-1">
+                        +X.X% จากเมื่อวาน
+                      </p>
+                    </div>
+                    <div className="bg-white/20 rounded-2xl p-4 animate-float-delay">
+                      <p className="text-white/80 text-sm mb-1">จำนวนบิล</p>
+                      <h4 className="text-white text-2xl font-bold tracking-wider">
+                        X
+                      </h4>
+                      <p className="text-green-700 text-sm mt-1">
+                        +X.X% จากเมื่อวาน
+                      </p>
+                    </div>
                   </div>
+                </div>
+
+                {/* Quick actions grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    {
+                      icon: (
+                        <HugeiconsIcon
+                          icon={Chart01Icon}
+                          size={24}
+                          color="currentColor"
+                          strokeWidth={1.5}
+                          className="text-white"
+                        />
+                      ),
+                      title: "รายงาน",
+                      delay: "animate-float-slow",
+                    },
+                    {
+                      icon: (
+                        <HugeiconsIcon
+                          icon={Invoice04Icon}
+                          size={24}
+                          color="currentColor"
+                          strokeWidth={1.5}
+                          className="text-white"
+                        />
+                      ),
+                      title: "สร้างบิล",
+                      delay: "animate-float-delay",
+                    },
+                    {
+                      icon: (
+                        <HugeiconsIcon
+                          icon={PackageSearchIcon}
+                          size={24}
+                          color="currentColor"
+                          strokeWidth={1.5}
+                          className="text-white"
+                        />
+                      ),
+                      title: "สินค้า",
+                      delay: "animate-float-slow",
+                    },
+                    {
+                      icon: (
+                        <HugeiconsIcon
+                          icon={Wallet01Icon}
+                          size={24}
+                          color="currentColor"
+                          strokeWidth={1.5}
+                          className="text-white"
+                        />
+                      ),
+                      title: "การเงิน",
+                      delay: "animate-float-delay",
+                    },
+                    {
+                      icon: (
+                        <HugeiconsIcon
+                          icon={Home01Icon}
+                          size={24}
+                          color="currentColor"
+                          strokeWidth={1.5}
+                          className="text-white"
+                        />
+                      ),
+                      title: "แดชบอร์ด",
+                      delay: "animate-float-slow",
+                    },
+                    {
+                      icon: (
+                        <HugeiconsIcon
+                          icon={Settings01Icon}
+                          size={24}
+                          color="currentColor"
+                          strokeWidth={1.5}
+                          className="text-white"
+                        />
+                      ),
+                      title: "ตั้งค่า",
+                      delay: "animate-float-delay",
+                    },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className={`h-24 bg-white/20 rounded-2xl transform transition-all duration-300 hover:scale-105 hover:bg-white/30 flex flex-col items-center justify-center gap-2 cursor-pointer group ${item.delay}`}
+                    >
+                      <span className="text-2xl group-hover:scale-110 transition-transform">
+                        {item.icon}
+                      </span>
+                      <p className="text-white text-sm font-medium">
+                        {item.title}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Activity indicators */}
+                <div className="mt-8 flex justify-center space-x-2">
+                  <div className="w-2 h-2 bg-white/40 rounded-full animate-float-slow" />
+                  <div className="w-2 h-2 bg-white rounded-full animate-float-delay" />
+                  <div className="w-2 h-2 bg-white/40 rounded-full animate-float-slow" />
                 </div>
               </div>
             </div>

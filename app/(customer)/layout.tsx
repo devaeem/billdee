@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import HeaderCus from "./customer/components/header-cus";
 import Sidebar from "./customer/components/sidebar";
+import { BreadcrumbDemo } from "./customer/components/breadcrumb";
 
 // Breakpoint utility
 const useBreakpoint = () => {
@@ -71,13 +72,14 @@ export default function AdminLayout({
                 transition-transform duration-300
                 ${
                   !isDesktop && !isSidebarOpen
-                    ? "-translate-x-full"
-                    : "translate-x-0"
+                    ? "-translate-x-full duration-300 ease-in-out"
+                    : "translate-x-0 duration-300 ease-in-out"
                 }
               `}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="h-full overflow-y-auto">
+              {/* h-full overflow-y-auto */}
+              <div className="">
                 <Sidebar />
               </div>
             </aside>
@@ -86,14 +88,17 @@ export default function AdminLayout({
 
         {/* Main Content */}
         <main
-          className={`
+          className={` bg-slate-200/20
             flex-1 transition-all duration-300
             ${isDesktop ? "" : "ml-0"}
-            px-4 sm:px-6 lg:px-8
+           
             overflow-y-auto h-[calc(100vh-4rem)]
           `}
         >
-          <div className="py-6">{children}</div>
+          <div className="p-6 flex flex-col gap-6">
+            <BreadcrumbDemo />
+            {children}
+          </div>
         </main>
       </div>
     </div>
