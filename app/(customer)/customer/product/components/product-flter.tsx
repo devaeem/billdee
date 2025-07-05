@@ -2,13 +2,8 @@
 
 import Btn from "@/components/custom-ui/btn";
 import Input from "@/components/custom-ui/input";
-import {
-  PlusSignCircleIcon,
-  PlusSignSquareIcon,
-  SearchIcon,
-} from "@hugeicons/core-free-icons";
+import { PlusSignCircleIcon, SearchIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { PlusIcon } from "lucide-react";
 import React from "react";
 
 interface ProductFilterProps {

@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,11 +27,9 @@ const paymentFormSchema = z.object({
   cardName: z
     .string()
     .min(2, { message: "ชื่อบนบัตรต้องมีความยาวอย่างน้อย 2 ตัวอักษร" }),
-  expiryDate: z
-    .string()
-    .regex(/^(0[1-9]|1[0-2])\/([0-9]{2})$/, {
-      message: "รูปแบบวันหมดอายุไม่ถูกต้อง (MM/YY)",
-    }),
+  expiryDate: z.string().regex(/^(0[1-9]|1[0-2])\/([0-9]{2})$/, {
+    message: "รูปแบบวันหมดอายุไม่ถูกต้อง (MM/YY)",
+  }),
   cvv: z
     .string()
     .min(3, { message: "CVV ต้องมี 3 หลัก" })
@@ -72,7 +69,7 @@ export function PaymentForm() {
       console.log(data);
       toast.success("บันทึกข้อมูลการชำระเงินเรียบร้อยแล้ว");
     } catch (error) {
-      toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+      toast.error(`เกิดข้อผิดพลาดในการบันทึกข้อมูล ${error}`);
     }
   }
 

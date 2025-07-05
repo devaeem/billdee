@@ -11,11 +11,6 @@ import {
   Clock,
   Calendar,
   DollarSign,
-  Plus,
-  LayoutGrid,
-  Table as TableIcon,
-  PlusIcon,
-  LayoutGridIcon,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -24,14 +19,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import Link from "next/link";
 import Btn from "@/components/custom-ui/btn";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -112,7 +99,7 @@ const RecordExpensesMain = () => {
     {
       header: "",
       accessorKey: "action",
-      cell: ({ row }) => {
+      cell: () => {
         return (
           <div className="flex items-center gap-2">
             <Btn variant="ghost" size="icon">

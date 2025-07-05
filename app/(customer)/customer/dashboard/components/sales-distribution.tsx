@@ -41,7 +41,7 @@ const SalesDistribution = () => {
                 fill="#8884d8"
                 paddingAngle={3}
                 dataKey="value"
-                label={({ name, value, percent }) =>
+                label={({ name, percent }) =>
                   `${name}\n${((percent || 0) * 100).toFixed(1)}%`
                 }
                 labelLine={true}

@@ -46,7 +46,7 @@ const ProductMain = () => {
       header: "",
       accessorKey: "handle",
       size: 100,
-      cell: ({ row }) => {
+      cell: () => {
         return (
           <div className="flex items-center gap-2 ">
             <Btn

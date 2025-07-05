@@ -3,8 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { format } from "date-fns";
-import { th } from "date-fns/locale";
+// import { format } from "date-fns";
+// import { th } from "date-fns/locale";
 
 import {
   Breadcrumb,
@@ -28,15 +28,15 @@ const routes: Record<string, string> = {
   "/customer/pos": "POS ขายหน้าร้าน",
 };
 
-const thaiDayNames = [
-  "อาทิตย์",
-  "จันทร์",
-  "อังคาร",
-  "พุธ",
-  "พฤหัสบดี",
-  "ศุกร์",
-  "เสาร์",
-];
+// const thaiDayNames = [
+//   "อาทิตย์",
+//   "จันทร์",
+//   "อังคาร",
+//   "พุธ",
+//   "พฤหัสบดี",
+//   "ศุกร์",
+//   "เสาร์",
+// ];
 
 export function BreadcrumbDemo() {
   const pathname = usePathname();
@@ -53,9 +53,9 @@ export function BreadcrumbDemo() {
     };
   });
 
-  const today = new Date();
-  const thaiDate = format(today, "d MMMM yyyy", { locale: th });
-  const dayName = thaiDayNames[today.getDay()];
+  // const today = new Date();
+  // const thaiDate = format(today, "d MMMM yyyy", { locale: th });
+  // const dayName = thaiDayNames[today.getDay()];
 
   return (
     <div className="flex items-center md:justify-between justify-start gap-2 w-full">

@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
 import { useProfile } from "@/hooks/use-profile";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -48,6 +47,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Image from "next/image";
 
 const getBackgroundColor = (letter: string = "") => {
   const normalizedLetter = letter.toLowerCase();
@@ -73,7 +73,7 @@ const achievements = [
 ];
 
 const ProfilePage = () => {
-  const { data: profile, isLoading } = useProfile();
+  const { data: profile } = useProfile();
   const [coverPhoto, setCoverPhoto] = React.useState<string | null>(
     "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=2070"
   );
@@ -115,9 +115,12 @@ const ProfilePage = () => {
             {/* Cover Photo */}
             <div className="relative h-80 overflow-hidden">
               {coverPhoto ? (
-                <img
+                <Image
                   src={coverPhoto}
                   alt="Cover"
+                  width={100}
+                  height={100}
+                  quality={100}
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               ) : (

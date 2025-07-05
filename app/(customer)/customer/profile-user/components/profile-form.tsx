@@ -72,7 +72,7 @@ export function ProfileForm() {
       toast.success("บันทึกข้อมูลโปรไฟล์เรียบร้อยแล้ว");
       await mutate(); // Refresh profile data
     } catch (error) {
-      toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+      toast.error(`เกิดข้อผิดพลาดในการบันทึกข้อมูล ${error}`);
     }
   }
 

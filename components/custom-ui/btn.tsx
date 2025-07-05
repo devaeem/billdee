@@ -1,12 +1,10 @@
 import { Button as UIButton } from "../ui/button";
-import { HugeiconsIcon } from "@hugeicons/react";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
 const Btn = ({
   startIcon,
   endIcon,
-  iconSize = 16,
   variant = "default",
   size = "default",
   children,

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
@@ -12,8 +12,8 @@ import ImageUploadPreview from "../../components/ImageUploadPreview";
 import Btn from "@/components/custom-ui/btn";
 
 export default function StoreInfoForm() {
-  const [logoPreview, setLogoPreview] = useState<string | null>(null);
-  const [qrCodePreview, setQrCodePreview] = useState<string | null>(null);
+  // const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  // const [qrCodePreview, setQrCodePreview] = useState<string | null>(null);
   return (
     <Card>
       <CardHeader>
@@ -28,13 +28,13 @@ export default function StoreInfoForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ImageUploadPreview
             type="logo"
-            preview={logoPreview}
+            preview={null}
             title="โลโก้ร้าน"
             subtitle="รูปแนะนำ 200x200 px (PNG, JPG)"
           />
           <ImageUploadPreview
             type="qr"
-            preview={qrCodePreview}
+            preview={null}
             title="QR Code พร้อมเพย์"
             subtitle="สำหรับใช้ทำแสกนจ่าย"
           />

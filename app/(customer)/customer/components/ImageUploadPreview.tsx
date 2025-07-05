@@ -1,9 +1,8 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Upload, X } from "lucide-react";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 
 interface ImageUploadPreviewProps {
@@ -20,8 +19,8 @@ const ImageUploadPreview = ({
   subtitle,
 }: ImageUploadPreviewProps) => {
   const handleImageUpload = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: "logo" | "qr"
+    e: React.ChangeEvent<HTMLInputElement>
+    // type: "logo" | "qr"
   ) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -76,7 +75,7 @@ const ImageUploadPreview = ({
               ref={inputRef}
               accept="image/*"
               className="hidden"
-              onChange={(e) => handleImageUpload(e, type)}
+              onChange={(e) => handleImageUpload(e)}
             />
           </div>
         </div>

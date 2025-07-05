@@ -3,29 +3,31 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import {
-  HomeIcon,
-  ShoppingBagIcon,
-  ReceiptIcon,
-  BellIcon,
-  SparklesIcon,
-  SettingsIcon,
-  CheckCircle2Icon,
-} from "lucide-react";
+import { SparklesIcon, CheckCircle2Icon } from "lucide-react";
 import {
   ArrowUp01Icon,
   BitcoinReceiptIcon,
   DashboardSquare01Icon,
   Invoice03Icon,
-  SaleTag01Icon,
   Settings02Icon,
   ShoppingBag03Icon,
 } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { HugeiconsIcon, IconSvgElement } from "@hugeicons/react";
 import { Modal } from "@/components/custom-ui/modal/modal";
 import { Button } from "@/components/ui/button";
 
-export const navigation = [
+type NavigationItem = {
+  name: string;
+  href: string;
+  icon: IconSvgElement;
+  subMenu?: {
+    name: string;
+    href: string;
+    icon: IconSvgElement;
+  }[];
+};
+
+export const navigation: NavigationItem[] = [
   {
     name: "หน้าหลัก",
     href: "/customer/dashboard",
@@ -84,9 +86,8 @@ const Sidebar = () => {
       <div className="flex-1 overflow-y-auto px-4 pt-4">
         <nav className="flex flex-col h-full ">
           <ul role="list" className="-mx-2 space-y-1">
-            {navigation.map((item: any) => {
+            {navigation.map((item: NavigationItem) => {
               const isActive = pathname === item.href;
-              const Icon = item.icon;
               const isSubMenuOpen = openSubMenus.includes(item.name);
 
               return (
@@ -153,7 +154,7 @@ const Sidebar = () => {
                         )}
                       >
                         <ul className="ml-6 mt-2 space-y-1">
-                          {item.subMenu.map((subItem: any) => {
+                          {item.subMenu.map((subItem) => {
                             const isSubActive = pathname === subItem.href;
                             return (
                               <li key={subItem.name}>

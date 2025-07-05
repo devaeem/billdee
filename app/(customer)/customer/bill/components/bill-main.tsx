@@ -97,7 +97,7 @@ const BillMain = () => {
     {
       header: "",
       accessorKey: "action",
-      cell: ({ row }) => {
+      cell: () => {
         return (
           <div className="flex items-center gap-2">
             <Btn variant="ghost" size="icon">

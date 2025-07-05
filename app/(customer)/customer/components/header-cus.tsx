@@ -13,9 +13,6 @@ import {
 import {
   IconUserCircle,
   IconLogout,
-  IconHome,
-  IconFileInvoice,
-  IconPackage,
   IconMenu2,
   IconSettings,
   IconBell,

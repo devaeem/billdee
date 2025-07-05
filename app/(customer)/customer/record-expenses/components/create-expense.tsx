@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
+// import * as z from "zod";
 
 import {
   Card,
@@ -14,48 +12,48 @@ import {
 import Btn from "@/components/custom-ui/btn";
 import Input from "@/components/custom-ui/input";
 
-const formSchema = z.object({
-  description: z.string().min(1, "กรุณากรอกรายละเอียด"),
-  category: z.string().min(1, "กรุณาเลือกหมวดหมู่"),
-  amount: z.string().min(1, "กรุณากรอกจำนวนเงิน"),
-  date: z.string().min(1, "กรุณาเลือกวันที่"),
-  note: z.string().optional(),
-  status: z.string().min(1, "กรุณาเลือกสถานะ"),
-});
+// const formSchema = z.object({
+//   description: z.string().min(1, "กรุณากรอกรายละเอียด"),
+//   category: z.string().min(1, "กรุณาเลือกหมวดหมู่"),
+//   amount: z.string().min(1, "กรุณากรอกจำนวนเงิน"),
+//   date: z.string().min(1, "กรุณาเลือกวันที่"),
+//   note: z.string().optional(),
+//   status: z.string().min(1, "กรุณาเลือกสถานะ"),
+// });
 
-type FormValues = z.infer<typeof formSchema>;
+// type FormValues = z.infer<typeof formSchema>;
 
-const expenseCategories = [
-  { value: "วัตถุดิบ", label: "วัตถุดิบ" },
-  { value: "ขนส่ง", label: "ขนส่ง" },
-  { value: "เครื่องมือ", label: "เครื่องมือ" },
-  { value: "ค่าน้ำ", label: "ค่าน้ำ" },
-  { value: "ค่าไฟ", label: "ค่าไฟ" },
-  { value: "ค่าเช่า", label: "ค่าเช่า" },
-  { value: "อื่นๆ", label: "อื่นๆ" },
-];
+// const expenseCategories = [
+//   { value: "วัตถุดิบ", label: "วัตถุดิบ" },
+//   { value: "ขนส่ง", label: "ขนส่ง" },
+//   { value: "เครื่องมือ", label: "เครื่องมือ" },
+//   { value: "ค่าน้ำ", label: "ค่าน้ำ" },
+//   { value: "ค่าไฟ", label: "ค่าไฟ" },
+//   { value: "ค่าเช่า", label: "ค่าเช่า" },
+//   { value: "อื่นๆ", label: "อื่นๆ" },
+// ];
 
-const expenseStatuses = [
-  { value: "จ่ายแล้ว", label: "จ่ายแล้ว" },
-  { value: "ค้างจ่าย", label: "ค้างจ่าย" },
-];
+// const expenseStatuses = [
+//   { value: "จ่ายแล้ว", label: "จ่ายแล้ว" },
+//   { value: "ค้างจ่าย", label: "ค้างจ่าย" },
+// ];
 
 const CreateExpense = () => {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      description: "",
-      category: "",
-      amount: "",
-      date: new Date().toISOString().split("T")[0],
-      note: "",
-      status: "",
-    },
-  });
+  // const form = useForm<FormValues>({
+  //   resolver: zodResolver(formSchema),
+  //   defaultValues: {
+  //     description: "",
+  //     category: "",
+  //     amount: "",
+  //     date: new Date().toISOString().split("T")[0],
+  //     note: "",
+  //     status: "",
+  //   },
+  // });
 
-  const onSubmit = (values: FormValues) => {
-    console.log(values);
-  };
+  // const onSubmit = (values: FormValues) => {
+  //   console.log(values);
+  // };
 
   return (
     <Card>

@@ -49,7 +49,7 @@ export function NotificationsForm() {
       console.log(data);
       toast.success("บันทึกการตั้งค่าการแจ้งเตือนเรียบร้อยแล้ว");
     } catch (error) {
-      toast.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+      toast.error(`เกิดข้อผิดพลาดในการบันทึกข้อมูล ${error}`);
     }
   }
 
