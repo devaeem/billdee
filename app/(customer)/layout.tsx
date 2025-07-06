@@ -95,7 +95,7 @@ export default function AdminLayout({
             overflow-y-auto h-[calc(100vh-4rem)]
           `}
         >
-          <div className="p-6 flex flex-col gap-6">
+          <div className="p-3 sm:p-4 md:p-6 lg:p-6 flex flex-col gap-6">
             <BreadcrumbDemo />
             {children}
           </div>

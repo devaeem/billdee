@@ -1,5 +1,5 @@
-import Login from "./login";
+import LandingPage from "./(landing)/page";
 
 export default function Home() {
-  return <Login />;
+  return <LandingPage />;
 }

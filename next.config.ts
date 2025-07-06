@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
   // experimental: {
   //   outputFileTracingRoot: undefined, // defaults to process.cwd()
   // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

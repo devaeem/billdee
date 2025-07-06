@@ -1,25 +1,32 @@
 "use client";
 
-import Image from "next/image";
+import OrderLine from "./components/OrderLine";
+import FoodiesMenu from "./components/FoodiesMenu";
+import MenuItems from "./components/MenuItems";
+import OrderSummary from "./components/OrderSummary";
 
 export default function POSPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <Image
-            src="/404-illustration.svg"
-            alt="Development"
-            width={400}
-            height={400}
-            className="mx-auto mb-8"
-          />
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            🚧 อยู่ระหว่างการพัฒนา 🚧
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            ขณะนี้เรากำลังพัฒนาระบบ POS เพื่อให้ตอบโจทย์การใช้งานของคุณมากที่สุด
-          </p>
+    <div className="min-h-screen  dark:from-gray-900 dark:to-gray-800">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 ">
+        {/* Main Content Area */}
+        <div className="xl:col-span-9 space-y-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
+            <OrderLine />
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
+            <FoodiesMenu />
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
+            <MenuItems />
+          </div>
+        </div>
+
+        {/* Order Summary Sidebar - Fixed and Full Height */}
+        <div className="xl:col-span-3">
+          <OrderSummary />
         </div>
       </div>
     </div>

@@ -80,7 +80,7 @@ const ProfilePage = () => {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = React.useState(false);
   const [bio, setBio] = React.useState(
-    "นักธุรกิจรุ่นใหม่ที่หลงใหลในการสร้างธุรกิจออนไลน์ 🚀"
+    "นักธุรกิจรุ่นใหม่ที่หลงใหลในการสร้างธุรกิจออนไลน์"
   );
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -280,7 +280,10 @@ const ProfilePage = () => {
                     </div>
                   ) : (
                     <div className="group relative">
-                      <p className="text-sm text-muted-foreground">{bio}</p>
+                      <p className="text-sm text-muted-foreground flex items-center gap-2">
+                        {bio}
+                        <IconTrendingUp className="size-4 text-blue-500" />
+                      </p>
                       <Button
                         size="icon"
                         variant="ghost"
