@@ -13,6 +13,7 @@ export interface InputProps
   endIcon?: React.ReactNode;
   containerClassName?: string;
   required?: boolean;
+  op?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -23,6 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       label,
       error,
       startIcon,
+      op = false,
       endIcon,
       containerClassName,
       required,
@@ -42,6 +44,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             <div className="flex items-center gap-1">
               {required && <span className="text-red-500 text-base">*</span>}
               {label}
+              {op && <span className="text-gray-500 text-sm">{op}</span>}
             </div>
           </Label>
         )}

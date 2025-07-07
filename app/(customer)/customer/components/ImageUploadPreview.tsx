@@ -10,6 +10,8 @@ interface ImageUploadPreviewProps {
   preview: string | null;
   title: string;
   subtitle: string;
+  onUploadSuccess?: (url: string) => void;
+  onRemove?: () => void;
 }
 
 const ImageUploadPreview = ({
@@ -17,18 +19,21 @@ const ImageUploadPreview = ({
   preview,
   title,
   subtitle,
+  onUploadSuccess,
+  onRemove,
 }: ImageUploadPreviewProps) => {
-  const handleImageUpload = (
-    e: React.ChangeEvent<HTMLInputElement>
-    // type: "logo" | "qr"
-  ) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log(file);
+      // TODO: Implement actual file upload logic here
+      // For now, we'll use a fake URL
+      const fakeUrl = URL.createObjectURL(file);
+      onUploadSuccess?.(fakeUrl);
     }
   };
-  const handleRemoveImage = (type: "logo" | "qr") => {
-    console.log(type);
+
+  const handleRemoveImage = () => {
+    onRemove?.();
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -50,7 +55,7 @@ const ImageUploadPreview = ({
                 />
               </div>
               <button
-                onClick={() => handleRemoveImage(type)}
+                onClick={handleRemoveImage}
                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <X size={16} />
@@ -75,7 +80,7 @@ const ImageUploadPreview = ({
               ref={inputRef}
               accept="image/*"
               className="hidden"
-              onChange={(e) => handleImageUpload(e)}
+              onChange={handleImageUpload}
             />
           </div>
         </div>

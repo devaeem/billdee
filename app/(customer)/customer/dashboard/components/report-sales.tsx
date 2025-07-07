@@ -114,7 +114,7 @@ const ReportSales = () => {
   const isMobile = useIsMobile();
   const [selectedYear, setSelectedYear] = useState("2024");
   const [selectedView, setSelectedView] = useState<"sales" | "profit">("sales");
-  const [selectedRange, setSelectedRange] = useState("30");
+  const [selectedRange, setSelectedRange] = useState("7");
   const [viewType, setViewType] = useState<"daily" | "monthly">("daily");
 
   const data = useMemo(() => {

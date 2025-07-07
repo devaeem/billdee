@@ -2,19 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
-export function CTASection() {
+const CtaSection = () => {
   return (
     <section className="py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="relative isolate rounded-[2rem] bg-orange-50 dark:bg-orange-500/5"
-        >
+        <div className="relative isolate rounded-[2rem] bg-orange-50 dark:bg-orange-500/5">
           {/* Decorative elements */}
           <div className="absolute inset-0 -z-10">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,theme(colors.orange.100),transparent)]" />
@@ -117,8 +110,10 @@ export function CTASection() {
               </svg>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+};
+
+export default CtaSection;

@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 const tiers = [
@@ -59,37 +58,21 @@ const tiers = [
   },
 ];
 
-export function PricingSection() {
+const PricingSection = () => {
   return (
-    <section id="pricing" className="py-24 bg-background relative">
-      {/* Background decoration */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(40rem_40rem_at_top,theme(colors.orange.50),transparent)]" />
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-base font-semibold leading-7 text-orange-600">
+    <div className="py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-base font-semibold leading-7 text-orange-500">
             ราคา
           </h2>
           <p className="mt-2 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            เลือกแพ็กเกจที่เหมาะกับคุณ
-          </p>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            เริ่มต้นใช้งานฟรี และอัพเกรดเมื่อธุรกิจของคุณพร้อม
+            เลือกแพ็คเกจที่เหมาะกับคุณ
           </p>
         </div>
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 items-start">
+        <div className="isolate mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {tiers.map((tier, index) => (
-            <motion.div
-              key={tier.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative"
-            >
+            <div key={index} className="relative">
               <Card
                 className={`relative h-full p-8 ${
                   tier.popular
@@ -160,7 +143,7 @@ export function PricingSection() {
                   </Link>
                 </div>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -176,6 +159,8 @@ export function PricingSection() {
           </p>
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default PricingSection;

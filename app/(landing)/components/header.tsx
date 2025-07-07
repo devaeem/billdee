@@ -9,7 +9,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -43,19 +42,19 @@ export function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
         {/* Logo */}
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-            <div className="relative w-8 h-8">
-              <Image
-                src="/vercel.svg"
-                alt="Logo"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <span className="text-xl font-semibold text-foreground">
-              BillDee
+          <div className="flex items-center gap-3 p-1">
+            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-red-500 to-orange-500 shadow-lg ring-2 ring-primary/10" />
+            <span className="flex flex-col">
+              <span className="flex items-center gap-2">
+                <span className="text-xl font-extrabold tracking-widest uppercase hover:text-orange-500 transition-colors duration-200">
+                  BillDee
+                </span>
+              </span>
+              <span className="text-xs font-bold text-muted-foreground tracking-wide">
+                ระบบบิลออนไลน์และจัดการร้านค้า
+              </span>
             </span>
-          </Link>
+          </div>
         </div>
 
         {/* Mobile menu button */}
@@ -63,9 +62,13 @@ export function Header() {
           <ThemeToggle />
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden hover:bg-orange-100 dark:hover:bg-orange-500/10"
+              >
                 <svg
-                  className="h-6 w-6"
+                  className="h-6 w-6 text-orange-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -79,9 +82,11 @@ export function Header() {
                 </svg>
               </Button>
             </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>เมนู</SheetTitle>
+            <SheetContent className="w-[300px] sm:w-[350px] border-l border-orange-100 dark:border-orange-500/10">
+              <SheetHeader className="border-b border-orange-100 dark:border-orange-500/10 pb-4">
+                <SheetTitle className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                  เมนู
+                </SheetTitle>
               </SheetHeader>
               <div className="mt-6 flow-root">
                 <div className="space-y-2 py-6">
@@ -89,24 +94,24 @@ export function Header() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                      className="flex items-center px-3 py-3 text-base font-medium text-muted-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-500/5 rounded-lg transition-all duration-200"
                     >
                       {item.name}
                     </Link>
                   ))}
-                  <div className="border-t border-orange-100 dark:border-orange-500/10 pt-4 mt-4">
+                  <div className="border-t border-orange-100 dark:border-orange-500/10 pt-6 mt-6 space-y-3">
                     <Link href="/login">
                       <Button
-                        className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                        className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transition-all duration-200"
                         size="lg"
                       >
                         เข้าสู่ระบบ
                       </Button>
                     </Link>
-                    <Link href="/register" className="mt-2 block">
+                    <Link href="/register" className="block">
                       <Button
                         variant="outline"
-                        className="w-full border-orange-200 hover:bg-orange-100 dark:border-orange-500/20 dark:hover:bg-orange-500/10"
+                        className="w-full border-2 border-orange-200 hover:bg-orange-100 dark:border-orange-500/20 dark:hover:bg-orange-500/10 hover:border-orange-500 transition-all duration-200"
                         size="lg"
                       >
                         ลงทะเบียน

@@ -29,10 +29,7 @@ const NoData = ({
           transition-all duration-300 ease-in-out"
         >
           {icon && (
-            <div
-              className="w-24 h-24 mb-8 text-gray-400/90 animate-fade-in 
-            motion-safe:animate-bounce-slow"
-            >
+            <div className="w-24 h-24 mb-8 text-gray-400/90 animate-fade-in">
               {icon}
             </div>
           )}

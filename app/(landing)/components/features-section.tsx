@@ -1,7 +1,6 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { motion } from "framer-motion";
 
 const features = [
   {
@@ -67,7 +66,7 @@ const features = [
   },
 ];
 
-export function FeaturesSection() {
+const FeaturesSection = () => {
   return (
     <section
       id="features"
@@ -93,19 +92,7 @@ export function FeaturesSection() {
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
           {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              whileHover={{ scale: 1.02 }}
-              className="group relative"
-            >
+            <div key={index} className="group relative">
               <Card className="p-8 h-full bg-gradient-to-b from-orange-50/50 to-background dark:from-orange-500/5 dark:to-background border-orange-100 hover:border-orange-200 dark:border-orange-500/10 dark:hover:border-orange-500/20 transition-all duration-300">
                 <div className="relative flex flex-col h-full">
                   {/* Icon */}
@@ -133,7 +120,7 @@ export function FeaturesSection() {
                   </div>
                 </div>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -168,4 +155,6 @@ export function FeaturesSection() {
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.orange.50),transparent)] dark:bg-[radial-gradient(45rem_50rem_at_top,theme(colors.orange.500/0.05),transparent)]" />
     </section>
   );
-}
+};
+
+export default FeaturesSection;
