@@ -24,11 +24,36 @@ const ImageUploadPreview = ({
 }: ImageUploadPreviewProps) => {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      // TODO: Implement actual file upload logic here
-      // For now, we'll use a fake URL
-      const fakeUrl = URL.createObjectURL(file);
-      onUploadSuccess?.(fakeUrl);
+    if (!file) return;
+
+    // Validate file type
+    const validTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (!validTypes.includes(file.type)) {
+      alert("กรุณาอัพโหลดไฟล์รูปภาพเท่านั้น (JPG, PNG, GIF)");
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    if (file.size > maxSize) {
+      alert("ขนาดไฟล์ต้องไม่เกิน 5MB");
+      return;
+    }
+
+    try {
+      // Create preview URL
+      const previewUrl = URL.createObjectURL(file);
+
+      // Call onUploadSuccess with the preview URL
+      onUploadSuccess?.(previewUrl);
+
+      // Clean up the object URL when component unmounts
+      return () => {
+        URL.revokeObjectURL(previewUrl);
+      };
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      alert("เกิดข้อผิดพลาดในการอัพโหลดรูปภาพ");
     }
   };
 
@@ -46,12 +71,14 @@ const ImageUploadPreview = ({
         <div className="flex items-start gap-4">
           {preview ? (
             <div className="relative group">
-              <div className="relative w-[200px] h-[200px] rounded-lg overflow-hidden border bg-white">
+              <div className="relative w-[200px] h-[200px] rounded-lg overflow-hidden border bg-white flex items-center justify-center">
                 <Image
                   src={preview}
                   alt={`${title} preview`}
-                  fill
-                  className="object-contain p-2"
+                  width={180}
+                  height={180}
+                  className="max-w-full max-h-full object-contain"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
               <button

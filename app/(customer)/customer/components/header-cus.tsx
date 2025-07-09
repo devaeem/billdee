@@ -223,7 +223,7 @@ const HeaderCus = () => {
   );
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:px-6">
+    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:px-6 shadow-md">
       {/* Left side - Website Name */}
       <div className="flex items-center space-x-3">
         <div className="h-8 w-8 rounded-full bg-gradient-to-br from-red-500 to-orange-500 shadow-lg ring-2 ring-primary/10 transition-all duration-300 hover:scale-110 hover:shadow-orange-500/50" />

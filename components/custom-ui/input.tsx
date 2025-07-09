@@ -58,6 +58,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           <InputUI
             type={type}
+            autoFocus={false}
             className={cn(
               "h-12 w-full rounded-2xl border bg-white px-4 text-base transition-colors",
               "focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent",
