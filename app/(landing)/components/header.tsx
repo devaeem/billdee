@@ -1,161 +1,154 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ThemeToggle } from "@/components/theme-toggle";
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Menu01Icon, Store02Icon } from "@hugeicons/core-free-icons";
+import Btn from "@/components/custom-ui/btn";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { motion } from "framer-motion";
 
-const navigation = [
-  { name: "หน้าแรก", href: "#" },
-  { name: "คุณสมบัติ", href: "#features" },
-  { name: "ราคา", href: "#pricing" },
-  { name: "เกี่ยวกับเรา", href: "#about" },
-  { name: "ติดต่อ", href: "#contact" },
-];
-
-export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+export default function Header() {
+  const navItems = [
+    { href: "#products", label: "Products" },
+    { href: "#about", label: "About us" },
+    { href: "#resources", label: "Resources" },
+  ];
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-orange-100 dark:border-orange-500/10"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
-        {/* Logo */}
-        <div className="flex lg:flex-1">
-          <div className="flex items-center gap-3 p-1">
-            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-red-500 to-orange-500 shadow-lg ring-2 ring-primary/10" />
-            <span className="flex flex-col">
-              <span className="flex items-center gap-2">
-                <span className="text-xl font-extrabold tracking-widest uppercase hover:text-orange-500 transition-colors duration-200">
-                  BillDee
-                </span>
-              </span>
-              <span className="text-xs font-bold text-muted-foreground tracking-wide">
-                ระบบบิลออนไลน์และจัดการร้านค้า
-              </span>
+    <header className="fixed top-0 z-50 w-full bg-white border-b border-gray-200/80 shadow-sm">
+      <div className="mx-auto max-w-[1920px] px-4 sm:px-6">
+        <div className="relative flex h-16 items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="relative flex items-center space-x-2 group">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <HugeiconsIcon
+                icon={Store02Icon}
+                size={40}
+                className="text-emerald-500 group-hover:text-emerald-600 transition-all duration-500 ease-out"
+                strokeWidth={2}
+              />
+            </motion.div>
+            <span className="text-3xl font-extrabold tracking-wide uppercase text-emerald-500 group-hover:text-emerald-600 transition-all duration-500 ease-out">
+              BillDee
             </span>
-          </div>
-        </div>
+          </Link>
 
-        {/* Mobile menu button */}
-        <div className="flex items-center gap-4 lg:hidden">
-          <ThemeToggle />
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="lg:hidden hover:bg-orange-100 dark:hover:bg-orange-500/10"
+          {/* Desktop Navigation - Centered */}
+          <nav className="hidden items-center gap-8 md:flex">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group relative text-base font-bold text-gray-600 transition-all duration-500 ease-out hover:text-gray-900"
               >
-                <svg
-                  className="h-6 w-6 text-orange-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                {item.label}
+                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-emerald-500 transition-all duration-500 ease-out group-hover:w-full rounded-full" />
+              </Link>
+            ))}
+          </nav>
+
+          {/* Actions */}
+          <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-3">
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <Link href="/contact">
+                  <Btn
+                    size="sm"
+                    className="rounded-full px-6 py-2 text-emerald-500 border-emerald-500 border-2 bg-white hover:bg-gradient-to-r hover:from-emerald-500 hover:to-emerald-600 hover:text-white hover:border-transparent transition-all duration-500 ease-out shadow-sm hover:shadow-md"
+                  >
+                    Contact Us
+                  </Btn>
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Mobile Menu */}
+            <Sheet>
+              <VisuallyHidden>
+                <SheetTitle>Menu</SheetTitle>
+              </VisuallyHidden>
+              <SheetTrigger asChild className="md:hidden">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </Button>
-            </SheetTrigger>
-            <SheetContent className="w-[300px] sm:w-[350px] border-l border-orange-100 dark:border-orange-500/10">
-              <SheetHeader className="border-b border-orange-100 dark:border-orange-500/10 pb-4">
-                <SheetTitle className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
-                  เมนู
-                </SheetTitle>
-              </SheetHeader>
-              <div className="mt-6 flow-root">
-                <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-center px-3 py-3 text-base font-medium text-muted-foreground hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-500/5 rounded-lg transition-all duration-200"
+                  <Btn
+                    size="icon"
+                    variant="ghost"
+                    className="text-emerald-500 p-1.5 hover:bg-emerald-50 transition-all duration-500 ease-out"
+                  >
+                    <HugeiconsIcon
+                      icon={Menu01Icon}
+                      size={24}
+                      className="text-emerald-500"
+                      strokeWidth={2}
+                    />
+                  </Btn>
+                </motion.div>
+              </SheetTrigger>
+
+              <SheetContent
+                side="right"
+                className="w-full sm:w-[300px] border-l border-gray-200/80 bg-white/95 backdrop-blur-sm"
+              >
+                <div className="flex flex-col gap-8 pt-10 px-6">
+                  {navItems.map((item) => (
+                    <motion.div
+                      key={item.href}
+                      whileHover={{ x: 8 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
                     >
-                      {item.name}
-                    </Link>
+                      <Link
+                        href={item.href}
+                        className="text-lg font-medium text-gray-600 transition-all duration-500 ease-out hover:text-gray-900 uppercase tracking-wide hover:font-bold"
+                      >
+                        {item.label}
+                      </Link>
+                    </motion.div>
                   ))}
-                  <div className="border-t border-orange-100 dark:border-orange-500/10 pt-6 mt-6 space-y-3">
-                    <Link href="/login">
-                      <Button
-                        className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transition-all duration-200"
-                        size="lg"
-                      >
-                        เข้าสู่ระบบ
-                      </Button>
-                    </Link>
-                    <Link href="/register" className="block">
-                      <Button
-                        variant="outline"
-                        className="w-full border-2 border-orange-200 hover:bg-orange-100 dark:border-orange-500/20 dark:hover:bg-orange-500/10 hover:border-orange-500 transition-all duration-200"
-                        size="lg"
-                      >
-                        ลงทะเบียน
-                      </Button>
-                    </Link>
+                  <div className="flex flex-col gap-4 justify-end">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    >
+                      <Link href="/contact">
+                        <Button className="w-full rounded-full border-1 font-bold border-emerald-500 bg-white text-emerald-500 hover:bg-gradient-to-r hover:from-emerald-500 hover:to-emerald-600 hover:text-white hover:border-transparent transition-all duration-500 ease-out shadow-sm hover:shadow-md">
+                          Contact Us
+                        </Button>
+                      </Link>
+                    </motion.div>
                   </div>
                 </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
-
-        {/* Desktop menu */}
-        <div className="hidden lg:flex lg:gap-x-8">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
-
-        {/* Desktop right section */}
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-6">
-          <ThemeToggle />
-          <div className="h-4 w-px bg-orange-200 dark:bg-orange-500/20" />
-          <Link href="/login">
-            <Button
-              variant="ghost"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              เข้าสู่ระบบ
-            </Button>
-          </Link>
-          <Link href="/register">
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-              ลงทะเบียน
-            </Button>
-          </Link>
-        </div>
-      </nav>
+      </div>
     </header>
   );
 }

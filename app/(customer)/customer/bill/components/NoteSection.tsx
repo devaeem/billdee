@@ -9,9 +9,13 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { Control } from "react-hook-form";
+import { formSchema } from "./create-bill";
+import { z } from "zod";
+
+type FormValues = z.infer<typeof formSchema>;
 
 interface NoteSectionProps {
-  control: Control<any>;
+  control: Control<FormValues>;
 }
 
 const NoteSection = ({ control }: NoteSectionProps) => {

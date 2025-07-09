@@ -1,11 +1,11 @@
 "use client";
 
-import { Header } from "./components/header";
+import Header from "./components/header";
+import { HeroSection } from "./components/hero-section";
+import { FeaturesSection } from "./components/features-section";
+import { FAQSection } from "./components/faq-section";
+import { ReviewsSection } from "./components/reviews-section";
 import { Footer } from "./components/footer";
-import HeroSection from "./components/hero-section";
-import CtaSection from "./components/cta-section";
-import PricingSection from "./components/pricing-section";
-import FeaturesSection from "./components/features-section";
 
 export default function LandingPage() {
   return (
@@ -14,8 +14,8 @@ export default function LandingPage() {
       <main className="flex-1">
         <HeroSection />
         <FeaturesSection />
-        <PricingSection />
-        <CtaSection />
+        <ReviewsSection />
+        <FAQSection />
       </main>
       <Footer />
     </div>

@@ -1,8 +1,8 @@
 import React from "react";
-import Login from "../login";
+import LoginV from "./com/login-v";
 
 const LoginPage = () => {
-  return <Login />;
+  return <LoginV />;
 };
 
 export default LoginPage;

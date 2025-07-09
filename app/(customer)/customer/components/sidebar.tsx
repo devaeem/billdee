@@ -10,6 +10,7 @@ import {
   DashboardSquare01Icon,
   Invoice03Icon,
   Settings02Icon,
+  Settings03Icon,
   ShoppingBag03Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon, IconSvgElement } from "@hugeicons/react";
@@ -29,12 +30,12 @@ type NavigationItem = {
 
 export const navigation: NavigationItem[] = [
   {
-    name: "หน้าหลัก",
+    name: "Dashboard",
     href: "/customer/dashboard",
     icon: DashboardSquare01Icon,
   },
   { name: "สินค้า", href: "/customer/product", icon: ShoppingBag03Icon },
-  { name: "รายการบิล", href: "/customer/bill", icon: BitcoinReceiptIcon },
+  { name: "วางบิล", href: "/customer/bill", icon: BitcoinReceiptIcon },
   {
     name: "บันทึกค่าใช้จ่าย",
     href: "/customer/record-expenses",
@@ -42,8 +43,15 @@ export const navigation: NavigationItem[] = [
   },
   {
     name: "ตั้งค่าร้านค้า",
-    href: "/customer/seeting-shop",
+    href: "#",
     icon: Settings02Icon,
+    subMenu: [
+      {
+        name: "ข้อมูลร้านค้า",
+        href: "/customer/seeting-shop",
+        icon: Settings03Icon,
+      },
+    ],
   },
   // {
   //   name: "POS",
@@ -95,6 +103,11 @@ const Sidebar = () => {
                   <div className="flex flex-col">
                     <Link
                       href={item.href}
+                      onClick={() => {
+                        if (item.subMenu) {
+                          toggleSubMenu(item.name);
+                        }
+                      }}
                       className={cn(
                         isActive
                           ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"

@@ -5,79 +5,72 @@ import ReportSales from "./components/report-sales";
 import ProductBaseSale from "./components/product-base-sale";
 import CustomerBaseBuy from "./components/customer-base-buy";
 import NoData from "@/components/no-data";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { Modal } from "@/components/custom-ui/modal/modal";
+import Btn from "@/components/custom-ui/btn";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { Store } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { StoreRemove02Icon } from "@hugeicons/core-free-icons";
 
 const DashboardPage = () => {
   const router = useRouter();
-  const [showAlert, setShowAlert] = useState(false);
-  const store = false;
+  const [showModal, setShowModal] = useState(false);
+  const store = true;
 
   useEffect(() => {
     if (!store) {
-      setShowAlert(true);
+      setShowModal(true);
     }
   }, [store]);
 
   return (
     <>
-      <AlertDialog open={showAlert} onOpenChange={setShowAlert}>
-        <AlertDialogContent className="border-0 shadow-xl p-0 overflow-hidden max-w-[400px] rounded-3xl bg-white">
-          {/* Background Decoration */}
-          <div className="absolute inset-0 bg-gradient-to-b from-orange-50/80 to-white/20 pointer-events-none" />
-
-          <div className="relative flex flex-col items-center text-center p-8">
-            {/* Illustration Container */}
-            <div className="w-52 h-52 relative mb-6 group">
-              <div className="absolute inset-0 bg-orange-100 rounded-full opacity-20 group-hover:scale-105 transition-transform duration-300" />
-              <Image
-                src="/store-empty.svg"
-                alt="Empty Store Illustration"
-                fill
-                className="object-contain scale-90 group-hover:scale-95 transition-transform duration-300"
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        className="border-0 shadow-xl p-0 overflow-hidden rounded-3xl "
+      >
+        <div className="flex flex-col items-center text-center p-8">
+          {/* Icon Container with Animation */}
+          <div className="relative mb-8 group">
+            <div
+              className="absolute inset-0 bg-orange-100/50 rounded-full blur-2xl transform group-hover:scale-110 transition-all duration-300"
+              style={{
+                width: "120px",
+                height: "120px",
+                top: "-10px",
+                left: "-10px",
+              }}
+            />
+            <div className="relative bg-white/80 backdrop-blur-sm rounded-full p-6 shadow-lg transform group-hover:scale-105 transition-all duration-300">
+              <HugeiconsIcon
+                icon={StoreRemove02Icon}
+                size={64}
+                className="text-orange-600"
               />
             </div>
-
-            {/* Content */}
-            <div className="space-y-2 mb-8">
-              <AlertDialogTitle className="text-2xl font-semibold text-gray-900">
-                ไม่พบร้านค้า
-              </AlertDialogTitle>
-              <AlertDialogDescription className="text-[15px] leading-relaxed text-gray-500 max-w-[280px] mx-auto">
-                คุณยังไม่มีร้านค้า กรุณาสร้างร้านค้าก่อนใช้งาน
-              </AlertDialogDescription>
-            </div>
-
-            {/* Action Button */}
-            <AlertDialogAction
-              onClick={() => router.push("/customer/dashboard/create-shop")}
-              className={cn(
-                "w-full bg-gradient-to-r from-orange-500 to-red-500",
-                "hover:from-orange-600 hover:to-red-600",
-                "transition-all duration-300",
-                "text-white font-medium text-[15px]",
-                "px-6 py-3 rounded-xl",
-                "shadow-[0_4px_20px_-4px_rgba(234,88,12,0.3)]",
-                "hover:shadow-[0_4px_24px_-4px_rgba(234,88,12,0.4)]",
-                "hover:translate-y-[-1px]",
-                "flex items-center justify-center gap-2"
-              )}
-            >
-              <Store className="w-4 h-4" />
-              สร้างร้านค้า
-            </AlertDialogAction>
           </div>
-        </AlertDialogContent>
-      </AlertDialog>
+
+          {/* Content */}
+          <div className="space-y-3 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 tracking-tight">
+              ไม่พบร้านค้า
+            </h2>
+            <p className="text-[15px] leading-relaxed text-gray-600 max-w-[300px] mx-auto">
+              คุณยังไม่มีร้านค้า กรุณาสร้างร้านค้าก่อนใช้งาน
+            </p>
+          </div>
+
+          {/* Action Button */}
+          <div className="w-full max-w-[280px]">
+            <Btn
+              onClick={() => router.push("/customer/dashboard/create-shop")}
+              className="w-full h-11 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 transition-all duration-300"
+            >
+              สร้างร้านค้า
+            </Btn>
+          </div>
+        </div>
+      </Modal>
 
       {store ? (
         <>

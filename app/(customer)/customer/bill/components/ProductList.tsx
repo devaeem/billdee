@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/custom-ui/modal/modal";
 
 import Input from "@/components/custom-ui/input";
-import { Control, UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
+import { UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
 import ProductCard from "./ProductCard";
 import { Product, products } from "../data/products";
 import { useState, useRef, useEffect } from "react";
@@ -56,12 +56,6 @@ const ProductList = ({
     });
     setLastAddedIndex(fields.length);
   };
-
-  const setInputRef = (index: number) => (el: HTMLInputElement | null) => {
-    inputRefs.current[index] = el;
-  };
-
-  console.log("fields", fields);
 
   return (
     <Card className="p-4 shadow-sm">

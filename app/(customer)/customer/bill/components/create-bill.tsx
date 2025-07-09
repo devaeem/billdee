@@ -6,14 +6,15 @@ import * as z from "zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import dynamic from "next/dynamic";
 import BillPDF from "./bill-pdf";
-import { pdf } from "@react-pdf/renderer";
+import html2canvas from "html2canvas";
+
+// Create dynamic import for PDFViewer
+
 import CustomerForm from "./CustomerForm";
 import ProductList from "./ProductList";
 import NoteSection from "./NoteSection";
 import OrderSummary from "./OrderSummary";
-import html2canvas from "html2canvas";
 
 export const formSchema = z.object({
   customerName: z.string().min(1, "กรุณากรอกชื่อลูกค้า"),
@@ -38,23 +39,6 @@ export const formSchema = z.object({
 });
 
 type FormValues = z.infer<typeof formSchema>;
-
-// Create dynamic import for PDFViewer
-const PDFPreview = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-gray-900 mb-2">
-            กำลังโหลด...
-          </h1>
-        </div>
-      </div>
-    ),
-  }
-);
 
 const CreateBill = () => {
   const form = useForm<FormValues>({
@@ -108,19 +92,19 @@ const CreateBill = () => {
   };
 
   const handleGeneratePDF = () => {
-    const billData = {
-      customerName: form.watch("customerName") || "",
-      customerType: form.watch("customerType") || "",
-      phone: form.watch("phone") || "",
-      email: form.watch("email") || "",
-      address: form.watch("address") || "",
-      taxId: form.watch("taxId") || "",
-      items: form.watch("items") || [],
-      note: form.watch("note") || "",
-      subtotal: form.watch("subtotal"),
-      discount: form.watch("discount"),
-      total: form.watch("total"),
-    };
+    // const billData = {
+    //   customerName: form.watch("customerName") || "",
+    //   customerType: form.watch("customerType") || "",
+    //   phone: form.watch("phone") || "",
+    //   email: form.watch("email") || "",
+    //   address: form.watch("address") || "",
+    //   taxId: form.watch("taxId") || "",
+    //   items: form.watch("items") || [],
+    //   note: form.watch("note") || "",
+    //   subtotal: form.watch("subtotal"),
+    //   discount: form.watch("discount"),
+    //   total: form.watch("total"),
+    // };
 
     handlePreviewBill();
   };
@@ -141,6 +125,7 @@ const CreateBill = () => {
     };
 
     try {
+      const { pdf } = await import("@react-pdf/renderer");
       const blob = await pdf(<BillPDF data={billData} />).toBlob();
       const url = URL.createObjectURL(blob);
       window.open(url, "_blank");
@@ -156,19 +141,19 @@ const CreateBill = () => {
   };
 
   const handleGenerateImage = async () => {
-    const billData = {
-      customerName: form.watch("customerName") || "",
-      customerType: form.watch("customerType") || "",
-      phone: form.watch("phone") || "",
-      email: form.watch("email") || "",
-      address: form.watch("address") || "",
-      taxId: form.watch("taxId") || "",
-      items: form.watch("items") || [],
-      note: form.watch("note") || "",
-      subtotal: form.watch("subtotal"),
-      discount: form.watch("discount"),
-      total: form.watch("total"),
-    };
+    // const billData = {
+    //   customerName: form.watch("customerName") || "",
+    //   customerType: form.watch("customerType") || "",
+    //   phone: form.watch("phone") || "",
+    //   email: form.watch("email") || "",
+    //   address: form.watch("address") || "",
+    //   taxId: form.watch("taxId") || "",
+    //   items: form.watch("items") || [],
+    //   note: form.watch("note") || "",
+    //   subtotal: form.watch("subtotal"),
+    //   discount: form.watch("discount"),
+    //   total: form.watch("total"),
+    // };
 
     try {
       // Create a temporary container for the PDF
@@ -178,7 +163,7 @@ const CreateBill = () => {
       document.body.appendChild(container);
 
       // Render PDF content
-      const pdfElement = <BillPDF data={billData} />;
+      // const pdfElement = <BillPDF data={billData} />;
       const root = document.createElement("div");
       container.appendChild(root);
 

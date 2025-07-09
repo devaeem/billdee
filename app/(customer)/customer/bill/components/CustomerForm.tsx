@@ -13,9 +13,13 @@ import { Textarea } from "@/components/ui/textarea";
 import Input from "@/components/custom-ui/input";
 import { Control } from "react-hook-form";
 import Select from "@/components/custom-ui/select";
+import { formSchema } from "./create-bill";
+import { z } from "zod";
+
+type FormValues = z.infer<typeof formSchema>;
 
 interface CustomerFormProps {
-  control: Control<any>;
+  control: Control<FormValues>;
 }
 
 const CustomerForm = ({ control }: CustomerFormProps) => {

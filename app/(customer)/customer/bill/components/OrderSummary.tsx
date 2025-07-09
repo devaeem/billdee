@@ -11,9 +11,13 @@ import {
 import { Button } from "@/components/ui/button";
 import Input from "@/components/custom-ui/input";
 import { Control } from "react-hook-form";
+import { formSchema } from "./create-bill";
+import { z } from "zod";
+
+type FormValues = z.infer<typeof formSchema>;
 
 interface OrderSummaryProps {
-  control: Control<any>;
+  control: Control<FormValues>;
   itemCount: number;
   onDiscountClick: (percentage: number) => void;
 }

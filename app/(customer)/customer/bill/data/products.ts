@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export interface Product {
   name: string;
   color: string;
