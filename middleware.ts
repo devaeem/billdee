@@ -11,30 +11,26 @@ export async function middleware(request: NextRequest) {
   const publicPaths = ["/"];
   const isPublicPath = publicPaths.includes(request.nextUrl.pathname);
 
-  // Check if the path starts with /customer or /dashboard
-  const isProtectedPath =
-    request.nextUrl.pathname.startsWith("/customer") ||
-    request.nextUrl.pathname.startsWith("/dashboard");
-
-  // Check for admin-only paths
-  const isAdminPath = request.nextUrl.pathname.startsWith("/dashboard");
-
   // If the user is not authenticated and trying to access protected routes
-  if (!isAuthenticated && isProtectedPath) {
+  if (!isAuthenticated && !isPublicPath) {
     // Redirect to login page
     return NextResponse.redirect(new URL("/", request.url));
   }
 
   // If user is trying to access admin paths but doesn't have admin role
-  if (isAuthenticated && isAdminPath && userRole !== "ADMIN") {
-    // Redirect to dashboard if user tries to access admin routes
-    return NextResponse.redirect(new URL("/customer", request.url));
+  if (
+    isAuthenticated &&
+    request.nextUrl.pathname.startsWith("/dashboard") &&
+    userRole !== "ADMIN"
+  ) {
+    // Redirect to home if user tries to access admin routes
+    return NextResponse.redirect(new URL("/home", request.url));
   }
 
   // If the user is authenticated and trying to access public paths
   if (isAuthenticated && isPublicPath) {
     // Redirect based on role
-    const redirectPath = userRole === "ADMIN" ? "/dashboard" : "/dashboard";
+    const redirectPath = userRole === "ADMIN" ? "/dashboard" : "/home";
     return NextResponse.redirect(new URL(redirectPath, request.url));
   }
 

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import HeaderCus from "./customer/components/header-cus";
-import Sidebar from "./customer/components/sidebar";
-import { BreadcrumbDemo } from "./customer/components/breadcrumb";
+import HeaderCus from "./components/header-cus";
+import Sidebar from "./components/side-bar";
+import { BreadcrumbDemo } from "./components/breadcrumb";
 
 // Breakpoint utility
 const useBreakpoint = () => {
