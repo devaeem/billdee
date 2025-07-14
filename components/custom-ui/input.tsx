@@ -33,11 +33,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     return (
-      <div className={cn("w-full ", containerClassName)}>
+      <div className={cn("w-full flex flex-col gap-2", containerClassName)}>
         {label && (
           <Label
             className={cn(
-              "mb-1 block text-sm font-medium",
+              "block text-base font-medium",
               error ? "text-red-500" : "text-gray-700"
             )}
           >
@@ -60,7 +60,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             type={type}
             autoFocus={false}
             className={cn(
-              "h-12 w-full rounded-2xl border bg-white px-4 text-base transition-colors",
+              "h-11 w-full rounded-2xl border bg-white px-4 text-base transition-colors",
               "focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent",
               error && "border-red-500 focus:ring-red-500",
               startIcon && "pl-10",

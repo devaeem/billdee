@@ -19,6 +19,7 @@ import {
   IconCircleCheck,
   IconClock,
   IconAlertCircle,
+  IconCreditCard,
 } from "@tabler/icons-react";
 import { useProfile } from "@/hooks/use-profile";
 import { signOut } from "next-auth/react";
@@ -382,88 +383,6 @@ const HeaderCus = () => {
       </Sheet>
       {/* Right side - Profile */}
       <div className="items-center gap-3 hidden sm:hidden md:flex">
-        <div className="flex items-center gap-3">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="transition-transform hover:scale-105"
-                >
-                  <IconSettings className="size-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>ตั้งค่า</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-
-          <DropdownMenu>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="relative transition-transform hover:scale-105"
-                    >
-                      <IconBell className="size-5" />
-                      {getTotalUnreadCount() > 0 && (
-                        <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white animate-bounce">
-                          {getTotalUnreadCount()}
-                        </span>
-                      )}
-                    </Button>
-                  </DropdownMenuTrigger>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>การแจ้งเตือน</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-
-            <DropdownMenuContent
-              className="w-80 p-1"
-              align="end"
-              sideOffset={8}
-              alignOffset={0}
-              forceMount
-            >
-              <DropdownMenuLabel className="px-2 py-1.5 text-sm font-medium flex justify-between">
-                <div className="flex items-center gap-2">
-                  <IconBell className="size-4 text-muted-foreground" />
-                  <span className="text-sm font-medium">
-                    การแจ้งเตือน {getTotalUnreadCount()}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                  ล้าง
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator className="my-1 bg-muted/60" />
-              <div className="max-h-80 overflow-y-auto">
-                {notifications.new.length > 0 &&
-                  renderNotificationSection("ใหม่", notifications.new)}
-                {notifications.new.length > 0 &&
-                  notifications.earlier.length > 0 && (
-                    <DropdownMenuSeparator className="my-1 bg-muted/60" />
-                  )}
-                {notifications.earlier.length > 0 &&
-                  renderNotificationSection(
-                    "ก่อนหน้านี้",
-                    notifications.earlier
-                  )}
-              </div>
-              <DropdownMenuSeparator className="my-1 bg-muted/60" />
-              <DropdownMenuItem className="flex cursor-pointer items-center justify-center rounded-md px-2 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent">
-                ดูการแจ้งเตือนทั้งหมด
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="hidden sm:hidden md:flex">
             <button className="flex items-center gap-3 rounded-lg px-2 py-1.5 transition-all duration-200 hover:bg-accent/80 hover:shadow-sm active:scale-95">
@@ -519,17 +438,23 @@ const HeaderCus = () => {
             <DropdownMenuSeparator className="my-1 bg-muted/60" />
             <DropdownMenuGroup>
               <DropdownMenuItem
-                onClick={() => router.push("/customer/profile-user")}
+                onClick={() => router.push("/profile-user")}
                 className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-accent focus:bg-accent"
               >
                 <IconUserCircle className="size-4 text-muted-foreground" />
                 <span>โปรไฟล์</span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-accent focus:bg-accent">
-                <IconUserCircle className="size-4 text-muted-foreground" />
+              <DropdownMenuItem
+                onClick={() => router.push("/payment-history")}
+                className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-accent focus:bg-accent"
+              >
+                <IconCreditCard className="size-4 text-muted-foreground" />
                 <span>การชำระเงิน</span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-accent focus:bg-accent">
+              <DropdownMenuItem
+                onClick={() => router.push("/setting-system")}
+                className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors hover:bg-accent focus:bg-accent"
+              >
                 <IconSettings className="size-4 text-muted-foreground" />
                 <span>ตั้งค่า</span>
               </DropdownMenuItem>

@@ -46,7 +46,7 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
         {label && (
           <Label
             className={cn(
-              "mb-1 block text-sm font-medium",
+              "block text-base font-medium",
               error ? "text-red-500" : "text-gray-700"
             )}
           >
@@ -65,7 +65,7 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
           <SelectTrigger
             ref={ref}
             className={cn(
-              "h-12 w-full rounded-2xl border bg-white p-5 text-base transition-colors",
+              "h-10 w-full rounded-2xl border bg-white p-4 text-base transition-colors",
               "focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent",
               error && "border-red-500 focus:ring-red-500",
               className

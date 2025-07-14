@@ -1,7 +1,8 @@
 import React from "react";
+import MainHistory from "./component/main-his";
 
 const History = () => {
-  return <div>History</div>;
+  return <MainHistory />;
 };
 
 export default History;

@@ -14,11 +14,13 @@ import {
 } from "@/components/ui/breadcrumb";
 
 const routes: Record<string, string> = {
-  "/home": "ภาพรวมธุรกิจ",
+  "/home": "Overview",
   "/create-bill": "สร้างบิล",
   "/expenses": "ค่าใช้จ่าย",
   "/history": "ประวัติ",
+  "/payment-history": "ประวัติการชำระเงิน",
   "/setting": "ตั้งค่า",
+  "/profile-user": "โปรไฟล์",
 };
 
 export function BreadcrumbDemo() {

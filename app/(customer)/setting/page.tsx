@@ -1,7 +1,8 @@
 import React from "react";
+import MainSetting from "./component/main-setting";
 
 const Setting = () => {
-  return <div>Setting</div>;
+  return <MainSetting />;
 };
 
 export default Setting;
