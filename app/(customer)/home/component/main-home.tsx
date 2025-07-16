@@ -9,6 +9,7 @@ import ProjectsSummary from "./projects-summary";
 import ProjectsOverview from "./projects-overview";
 import DailyTasks from "./daily-tasks";
 import SummaryCards from "./summary-cards";
+import CardNoShop from "../../components/card-no-shop";
 
 const MainHome = () => {
   const [selectedMonth, setSelectedMonth] = useState("11"); // พฤศจิกายน
@@ -35,51 +36,50 @@ const MainHome = () => {
     setSelectedMonth(month);
     // ที่นี่สามารถเพิ่ม logic สำหรับโหลดข้อมูลใหม่ตามเดือนที่เลือก
   };
+  const hasShow = false;
 
   return (
     <>
-      {/* Header พร้อม dropdown เลือกเดือน */}
-      <DashboardHeader
-        selectedMonth={selectedMonth}
-        onMonthChange={handleMonthChange}
-      />
+      {hasShow ? (
+        <>
+          <DashboardHeader
+            selectedMonth={selectedMonth}
+            onMonthChange={handleMonthChange}
+          />
 
-      <div className="w-full">
-        <SummaryCards />
-      </div>
+          <div className="w-full">
+            <SummaryCards />
+          </div>
 
-      {/* แถวแรก: Monthly Target & Project Statistics */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Monthly Target - 1/3 */}
-        <div className="lg:col-span-1">
-          <MonthlyTarget />
-        </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Monthly Target - 1/3 */}
+            <div className="lg:col-span-1">
+              <MonthlyTarget />
+            </div>
 
-        {/* Project Statistics - 2/3 */}
-        <div className="lg:col-span-2">
-          <ProjectStatistics />
-        </div>
-      </div>
+            {/* Project Statistics - 2/3 */}
+            <div className="lg:col-span-2">
+              <ProjectStatistics />
+            </div>
+          </div>
 
-      {/* แถวที่สอง: Projects Summary, Projects Overview & Daily Tasks */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Projects Summary */}
-        <div className="lg:col-span-1">
-          <ProjectsSummary />
-        </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-1">
+              <ProjectsSummary />
+            </div>
 
-        {/* Projects Overview */}
-        <div className="lg:col-span-1">
-          <ProjectsOverview />
-        </div>
+            <div className="lg:col-span-1">
+              <ProjectsOverview />
+            </div>
 
-        {/* Daily Tasks */}
-        <div className="lg:col-span-1">
-          <DailyTasks />
-        </div>
-      </div>
-
-      {/* แถวที่สาม: Business Chart - Full Width */}
+            <div className="lg:col-span-1">
+              <DailyTasks />
+            </div>
+          </div>
+        </>
+      ) : (
+        <CardNoShop />
+      )}
     </>
   );
 };

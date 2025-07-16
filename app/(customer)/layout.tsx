@@ -66,9 +66,9 @@ export default function AdminLayout({
             {/* Sidebar content */}
             <aside
               className={`
-                fixed z-40 h-[calc(100vh-4rem)] 
-                ${isDesktop ? "w-64 relative" : "w-[280px]"}
-                bg-white 
+                fixed z-40 h-[calc(100vh-4rem)]
+                ${isDesktop ? "w-40 relative" : "w-[280px]"}
+                bg-white
                 transition-transform duration-300
                 ${
                   !isDesktop && !isSidebarOpen
@@ -79,9 +79,8 @@ export default function AdminLayout({
               onClick={(e) => e.stopPropagation()}
             >
               {/* h-full overflow-y-auto */}
-              <div className="">
-                <Sidebar />
-              </div>
+
+              <Sidebar />
             </aside>
           </>
         )}
@@ -91,7 +90,7 @@ export default function AdminLayout({
           className={` bg-slate-200/20
             flex-1 transition-all duration-300
             ${isDesktop ? "" : "ml-0"}
-           
+
             overflow-y-auto h-[calc(100vh-4rem)]
           `}
         >

@@ -111,13 +111,13 @@ const Page = () => {
       // Refresh profile data
       await mutate();
 
-      toast.success("บันทึกข้อมูลโปรไฟล์สำเร็จ", {
-        description: "ข้อมูลโปรไฟล์ของคุณได้รับการอัปเดตเรียบร้อยแล้ว",
+      toast.success("บันทึกสำเร็จ", {
+        description: "ของคุณได้รับการอัปเดตเรียบร้อยแล้ว",
       });
     } catch (error) {
       console.error("Error updating profile:", error);
       toast.error("เกิดข้อผิดพลาด", {
-        description: "ไม่สามารถบันทึกข้อมูลโปรไฟล์ได้ กรุณาลองใหม่อีกครั้ง",
+        description: "ไม่สามารถบันทึกได้ กรุณาลองใหม่อีกครั้ง",
       });
     }
   };
@@ -152,7 +152,7 @@ const Page = () => {
     <div className="flex flex-col gap-4">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">ข้อมูลโปรไฟล์</h1>
+        <h1 className="text-3xl font-bold tracking-tight"></h1>
         <p className="text-gray-600">
           จัดการข้อมูลส่วนตัวและการตั้งค่าบัญชีของคุณ
         </p>
@@ -160,55 +160,12 @@ const Page = () => {
 
       <Separator />
 
-      {/* Profile Overview Card */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <Avatar className="w-20 h-20">
-                <AvatarImage src={account?.profileImage || undefined} />
-                <AvatarFallback className="text-lg">
-                  {user.firstName?.charAt(0)}
-                  {user.lastName?.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-              <button className="absolute -bottom-1 -right-1 bg-orange-500 hover:bg-orange-600 text-white p-2 rounded-full transition-colors">
-                <HugeiconsIcon icon={CameraAddIcon} className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="flex-1">
-              <h2 className="text-2xl font-bold">
-                {user.firstName} {user.lastName}
-              </h2>
-              <p className="text-gray-600">{user.email}</p>
-              <div className="flex items-center gap-2 mt-2">
-                <Badge
-                  variant="outline"
-                  className={
-                    user.role === "ADMIN"
-                      ? "bg-orange-500 text-white"
-                      : "bg-green-500 text-white"
-                  }
-                >
-                  {user.role === "ADMIN" ? "ผู้ดูแลระบบ" : "ผู้ใช้งาน"}
-                </Badge>
-                {account?.subscription && (
-                  <Badge variant="secondary">
-                    แพ็กเกจ {account.subscription}
-                  </Badge>
-                )}
-              </div>
-            </div>
-          </div>
-        </CardHeader>
-      </Card>
-
       {/* Edit Profile Form */}
-      <Card>
+      <Card className="bg-white border-0 border-gray-200 rounded-4xl shadow-sm hover:shadow-md transition-shadow duration-200">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <HugeiconsIcon icon={User02Icon} className="w-5 h-5" />
-            แก้ไขข้อมูลโปรไฟล์
+            แก้ไข
           </CardTitle>
           <CardDescription>
             อัปเดตข้อมูลส่วนตัวและข้อมูลติดต่อของคุณ

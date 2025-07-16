@@ -42,18 +42,6 @@ export const navigation: NavigationItem[] = [
     href: "/setting",
     icon: Settings02Icon,
   },
-  // {
-  //   name: "POS",
-  //   href: "/customer/pos",
-  //   icon: SaleTag01Icon,
-  //   subMenu: [
-  //     {
-  //       name: "ระบบขายหน้าร้าน",
-  //       href: "/customer/pos/rider",
-  //       icon: SaleTag01Icon,
-  //     },
-  //   ],
-  // },
 ];
 
 const Sidebar = () => {
@@ -79,17 +67,17 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="flex h-[100dvh] flex-col border-r border-slate-200 bg-white shadow-md">
-      <div className="flex-1 overflow-y-auto px-4 pt-4">
+    <div className="flex flex-col h-[100dvh] border-r border-slate-200 bg-white shadow-md">
+      <div className="flex-1 overflow-y-auto px-6 pt-4">
         <nav className="flex flex-col h-full ">
-          <ul role="list" className="-mx-2 space-y-1">
+          <ul role="list" className="flex flex-col gap-6">
             {navigation.map((item: NavigationItem) => {
               const isActive = pathname === item.href;
               const isSubMenuOpen = openSubMenus.includes(item.name);
 
               return (
                 <li key={item.name}>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col w-full gap-4">
                     <Link
                       href={item.href}
                       onClick={() => {
@@ -100,31 +88,31 @@ const Sidebar = () => {
                       className={cn(
                         isActive
                           ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"
-                          : "text-gray-700 hover:bg-orange-50 hover:text-orange-600",
-                        "group flex items-center gap-2 rounded-md p-2.5 text-sm font-semibold leading-6 transition-all duration-200"
+                          : "text-gray-700 hover:bg-orange-200  hover:text-white",
+                        "group flex items-center gap-6 rounded-md px-2 py-2 text-sm font-semibold leading-6 transition-all duration-200"
                       )}
                     >
-                      <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-3">
+                      <div className="flex flex-col items-center justify-between w-full gap-6">
+                        <div className="flex flex-col items-center gap-2">
                           <HugeiconsIcon
                             icon={item.icon}
-                            size={24}
+                            size={26}
                             className={cn(
                               isActive
                                 ? "text-white"
                                 : "text-gray-700 group-hover:text-orange-600",
-                              "h-5 w-5 shrink-0 transition-colors"
+                              " shrink-0 transition-colors font-extrabold"
                             )}
                             aria-hidden="true"
                           />
-                          <span
+                          <p
                             className={cn(
-                              "text-sm font-bold text-muted-foreground transition-all duration-200 tracking-wider",
+                              "text-sm  font-bold text-muted-foreground transition-all duration-200 tracking-wider",
                               isActive && "text-white font-bold"
                             )}
                           >
                             {item.name}
-                          </span>
+                          </p>
                         </div>
                         {item.subMenu && (
                           <div

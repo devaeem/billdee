@@ -352,7 +352,7 @@ const HeaderCus = () => {
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-56 p-1"
+                className="w-56 p-1 bg-white border-0 border-gray-200 rounded-4xl shadow-sm hover:shadow-md transition-shadow duration-200"
                 align="end"
                 sideOffset={8}
                 alignOffset={0}
@@ -425,7 +425,7 @@ const HeaderCus = () => {
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-48 p-1"
+            className="w-48 p-3 bg-white border-0 border-gray-200 rounded-4xl shadow-sm hover:shadow-md transition-shadow duration-200"
             align="end"
             sideOffset={8}
             alignOffset={0}

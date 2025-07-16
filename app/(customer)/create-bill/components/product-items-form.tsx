@@ -90,7 +90,7 @@ export default function ProductItemsForm({
         </Button>
       </div>
 
-      <Card className="p-4">
+      <Card className="p-4 bg-white border-0 border-gray-200 rounded-4xl shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer">
         <div className="space-y-4">
           {fields.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">

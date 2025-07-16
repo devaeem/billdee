@@ -57,7 +57,7 @@ const MainSetting = () => {
   };
 
   return (
-    <Card>
+    <Card className="bg-white border-0 border-gray-200 rounded-4xl shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">ตั้งค่าข้อมูลร้าน</CardTitle>
         <CardDescription className="text-base">ข้อมูลร้าน</CardDescription>

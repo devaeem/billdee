@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -109,7 +110,7 @@ export default function CreateBill() {
 
   return (
     <>
-      <Card>
+      <Card className="bg-white border-0 border-gray-200 rounded-4xl shadow-sm hover:shadow-md transition-shadow duration-200 ">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">สร้างบิลขาย</CardTitle>
           <CardDescription className="text-sm text-muted-foreground">
@@ -165,6 +166,9 @@ export default function CreateBill() {
             setValue={setValue}
           />
         </CardContent>
+        <CardFooter className="flex justify-start">
+          <Btn>สร้างบิล</Btn>
+        </CardFooter>
       </Card>
       <Modal
         isOpen={createCustomer}
